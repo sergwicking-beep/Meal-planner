@@ -69,13 +69,10 @@
 
     /* Recipes tab */
     .recipes-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
       margin-bottom: 24px;
     }
 
-    .recipes-header p { color: var(--muted); font-size: 0.9rem; }
+    .recipes-header p { color: var(--muted); font-size: 0.9rem; margin-top: 4px; }
 
     .recipe-grid {
       display: grid;
@@ -85,36 +82,13 @@
 
     .recipe-card {
       background: var(--card);
-      border: 2px solid var(--border);
+      border: 1px solid var(--border);
       border-radius: 12px;
       padding: 16px;
-      cursor: pointer;
-      transition: border-color 0.15s, box-shadow 0.15s;
-      user-select: none;
+      transition: box-shadow 0.15s;
     }
 
     .recipe-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-
-    .recipe-card.selected {
-      border-color: var(--accent);
-      background: #fdf5f0;
-    }
-
-    .recipe-card .check {
-      width: 22px; height: 22px;
-      border: 2px solid var(--border);
-      border-radius: 50%;
-      margin-bottom: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.75rem;
-      color: #fff;
-      transition: background 0.15s, border-color 0.15s;
-    }
-
-    .recipe-card.selected .check {
-      background: var(--accent);
-      border-color: var(--accent);
-    }
 
     .recipe-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; }
 
@@ -126,6 +100,51 @@
       padding: 2px 8px;
       border-radius: 99px;
     }
+
+    /* Recipe picker on week tab */
+    .recipe-picker {
+      margin-bottom: 24px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+    }
+
+    .recipe-picker-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .recipe-picker-list { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .recipe-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      padding: 5px 12px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      user-select: none;
+      transition: border-color 0.15s, background 0.15s;
+    }
+
+    .recipe-pill:hover { border-color: var(--accent); }
+
+    .recipe-pill.selected {
+      background: #fdf5f0;
+      border-color: var(--accent);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .recipe-pill .pill-check { font-size: 0.75rem; }
 
     /* Week tab */
     .week-header {
@@ -351,33 +370,34 @@
 <header>
   <h1>Dinner Planner</h1>
   <nav>
-    <button class="active" data-tab="recipes">Recipes</button>
-    <button data-tab="week">This Week</button>
+    <button data-tab="week" class="active">This Week</button>
+    <button data-tab="recipes">Recipes</button>
     <button data-tab="shopping">Shopping List</button>
   </nav>
 </header>
 
 <main>
   <!-- Recipes tab -->
-  <div id="tab-recipes" class="tab active">
+  <div id="tab-recipes" class="tab">
     <div class="recipes-header">
-      <div>
-        <h2>Your Recipes</h2>
-        <p>Select dinners you want this week — we'll fill the rest.</p>
-      </div>
-      <span id="selected-count" style="font-size:0.9rem;color:var(--muted)"></span>
+      <h2>Your Recipes</h2>
+      <p>All your saved dinners.</p>
     </div>
     <div class="recipe-grid" id="recipe-grid"></div>
   </div>
 
   <!-- Week tab -->
-  <div id="tab-week" class="tab">
+  <div id="tab-week" class="tab active">
     <div class="week-header">
       <div>
         <h2>This Week</h2>
-        <p id="week-subtitle">Generate a plan or swap individual meals.</p>
+        <p id="week-subtitle">Pick meals to include, then generate a plan.</p>
       </div>
       <button class="btn" id="generate-btn">Generate Plan</button>
+    </div>
+    <div class="recipe-picker">
+      <div class="recipe-picker-label">Must include</div>
+      <div class="recipe-picker-list" id="recipe-picker-list"></div>
     </div>
     <div id="week-error"></div>
     <div class="week-grid" id="week-grid"></div>
@@ -444,43 +464,41 @@
     const res = await fetch('/recipes.json');
     recipes = await res.json();
     renderRecipeGrid();
+    renderRecipePicker();
     renderWeek();
   }
 
-  // --- Recipes tab ---
+  // --- Recipes tab (read-only) ---
   function renderRecipeGrid() {
     const grid = document.getElementById('recipe-grid');
     grid.innerHTML = recipes.map(r => `
-      <div class="recipe-card ${selectedIds.includes(r.id) ? 'selected' : ''}"
-           data-id="${r.id}" role="checkbox"
-           aria-checked="${selectedIds.includes(r.id)}">
-        <div class="check">${selectedIds.includes(r.id) ? '✓' : ''}</div>
+      <div class="recipe-card">
         <h3>${r.name}</h3>
         <span class="tag">${r.category}</span>
       </div>
     `).join('');
+  }
 
-    grid.querySelectorAll('.recipe-card').forEach(card => {
-      card.addEventListener('click', () => toggleRecipe(card.dataset.id));
+  // --- Recipe picker on week tab ---
+  function renderRecipePicker() {
+    const list = document.getElementById('recipe-picker-list');
+    list.innerHTML = recipes.map(r => `
+      <div class="recipe-pill ${selectedIds.includes(r.id) ? 'selected' : ''}" data-id="${r.id}">
+        ${selectedIds.includes(r.id) ? '<span class="pill-check">✓</span>' : ''}
+        ${r.name}
+      </div>
+    `).join('');
+
+    list.querySelectorAll('.recipe-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        const id = pill.dataset.id;
+        selectedIds = selectedIds.includes(id)
+          ? selectedIds.filter(x => x !== id)
+          : [...selectedIds, id];
+        save(LS.selected, selectedIds);
+        renderRecipePicker();
+      });
     });
-
-    updateSelectedCount();
-  }
-
-  function toggleRecipe(id) {
-    if (selectedIds.includes(id)) {
-      selectedIds = selectedIds.filter(x => x !== id);
-    } else {
-      selectedIds.push(id);
-    }
-    save(LS.selected, selectedIds);
-    renderRecipeGrid();
-  }
-
-  function updateSelectedCount() {
-    const el = document.getElementById('selected-count');
-    const n = selectedIds.length;
-    el.textContent = n === 0 ? '' : `${n} selected`;
   }
 
   // --- Week tab ---
