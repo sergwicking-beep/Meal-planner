@@ -62,7 +62,7 @@ Respond with ONLY valid JSON in this exact format, no other text. Use only the r
       messages: [{ role: "user", content: prompt }],
     });
 
-    const text = message.content[0].text.trim();
+    const text = message.content[0].text.trim().replace(/^```json\s*|^```\s*|```$/gm, '').trim();
     const parsed = JSON.parse(text);
 
     const validIds = recipes.map((r) => r.id);
