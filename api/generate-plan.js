@@ -78,6 +78,6 @@ Respond with ONLY valid JSON in this exact format, no other text. Use only the r
     return res.status(200).json({ plan: enriched });
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ error: "Failed to generate plan" });
+    return res.status(500).json({ error: err.message || "Failed to generate plan" });
   }
 }

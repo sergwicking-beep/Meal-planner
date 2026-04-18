@@ -522,8 +522,8 @@
         body: JSON.stringify({ selectedIds }),
       });
 
-      if (!res.ok) throw new Error('Server error');
       const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Server error');
       weekPlan = data.plan;
       save(LS.plan, weekPlan);
       renderWeek();
@@ -531,7 +531,7 @@
       checkedItems = {};
       save(LS.checked, checkedItems);
     } catch (err) {
-      errorEl.innerHTML = `<div class="error-banner">Could not generate plan — check your API key and try again.</div>`;
+      errorEl.innerHTML = `<div class="error-banner">Could not generate plan: ${err.message}</div>`;
     } finally {
       btn.disabled = false;
       btn.textContent = 'Generate Plan';
