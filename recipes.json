@@ -155,5 +155,64 @@
       { "name": "olive oil", "amount": "3 tbsp", "category": "Pantry" },
       { "name": "fresh mint", "amount": "small bunch", "category": "Veg" }
     ]
+  },
+  {
+    "id": "11",
+    "name": "Spicy Harissa Sprouts & Broccoli with Halloumi",
+    "category": "Vegetarian",
+    "servings": 4,
+    "ingredients": [
+      { "name": "broccoli", "amount": "1 head", "category": "Veg" },
+      { "name": "Brussels sprouts", "amount": "500g", "category": "Veg" },
+      { "name": "halloumi", "amount": "250g", "category": "Dairy" },
+      { "name": "harissa", "amount": "2 tbsp", "category": "Pantry" },
+      { "name": "olive oil", "amount": "2 tbsp", "category": "Pantry" },
+      { "name": "spinach", "amount": "150g", "category": "Veg" },
+      { "name": "sea salt", "amount": "pinch", "category": "Pantry" },
+      { "name": "lemon", "amount": "½", "category": "Veg" },
+      { "name": "flatbreads", "amount": "4", "category": "Pantry" },
+      { "name": "yogurt", "amount": "4 tbsp", "category": "Dairy" }
+    ]
+  },
+  {
+    "id": "12",
+    "name": "Groundnut Stew: Sweet Potato in Peanut & Tomato Sauce",
+    "category": "Vegan",
+    "servings": 4,
+    "ingredients": [
+      { "name": "sweet potatoes", "amount": "1kg", "category": "Veg" },
+      { "name": "onion", "amount": "1", "category": "Veg" },
+      { "name": "ginger", "amount": "2.5cm", "category": "Veg" },
+      { "name": "garlic", "amount": "2 cloves", "category": "Veg" },
+      { "name": "Scotch bonnet chilli", "amount": "1", "category": "Veg" },
+      { "name": "olive oil", "amount": "1 tbsp", "category": "Pantry" },
+      { "name": "sea salt", "amount": "1 tsp", "category": "Pantry" },
+      { "name": "peanut butter", "amount": "50g", "category": "Pantry" },
+      { "name": "chopped tomatoes", "amount": "1 x 400g tin", "category": "Pantry" },
+      { "name": "vegetable stock", "amount": "400ml", "category": "Pantry" },
+      { "name": "fresh coriander", "amount": "handful", "category": "Veg" },
+      { "name": "salted peanuts", "amount": "handful", "category": "Pantry" },
+      { "name": "white rice", "amount": "300g", "category": "Pantry" }
+    ]
+  },
+  {
+    "id": "13",
+    "name": "Gado Gado: Indonesian Salad with Peanut-Coconut Dressing",
+    "category": "Vegan",
+    "servings": 2,
+    "ingredients": [
+      { "name": "Charlotte potatoes", "amount": "1kg", "category": "Veg" },
+      { "name": "olive oil", "amount": "2 tbsp", "category": "Pantry" },
+      { "name": "sea salt", "amount": "1 tsp", "category": "Pantry" },
+      { "name": "green beans", "amount": "240g", "category": "Veg" },
+      { "name": "beansprouts", "amount": "300g", "category": "Veg" },
+      { "name": "fresh coriander", "amount": "handful", "category": "Veg" },
+      { "name": "crunchy peanut butter", "amount": "50g", "category": "Pantry" },
+      { "name": "coconut milk", "amount": "80ml", "category": "Pantry" },
+      { "name": "lime juice", "amount": "2 tbsp", "category": "Veg" },
+      { "name": "soy sauce", "amount": "1½ tbsp", "category": "Pantry" },
+      { "name": "red chilli", "amount": "1", "category": "Veg" },
+      { "name": "ginger", "amount": "2.5cm", "category": "Veg" }
+    ]
   }
 ]
