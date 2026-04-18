@@ -42,16 +42,16 @@ Rules:
 - Aim for variety: mix categories, avoid repeating the same protein two days in a row
 - You may use a recipe more than once only if there are fewer than 7 recipes total
 
-Respond with ONLY valid JSON in this exact format, no other text:
+Respond with ONLY valid JSON in this exact format, no other text. Use only the recipe IDs listed above — do not invent new IDs:
 {
   "plan": [
-    { "day": "Monday", "recipeId": "1" },
-    { "day": "Tuesday", "recipeId": "3" },
-    { "day": "Wednesday", "recipeId": "5" },
-    { "day": "Thursday", "recipeId": "2" },
-    { "day": "Friday", "recipeId": "7" },
-    { "day": "Saturday", "recipeId": "4" },
-    { "day": "Sunday", "recipeId": "6" }
+    { "day": "Monday", "recipeId": "<id from list above>" },
+    { "day": "Tuesday", "recipeId": "<id from list above>" },
+    { "day": "Wednesday", "recipeId": "<id from list above>" },
+    { "day": "Thursday", "recipeId": "<id from list above>" },
+    { "day": "Friday", "recipeId": "<id from list above>" },
+    { "day": "Saturday", "recipeId": "<id from list above>" },
+    { "day": "Sunday", "recipeId": "<id from list above>" }
   ]
 }`;
 
@@ -65,9 +65,13 @@ Respond with ONLY valid JSON in this exact format, no other text:
     const text = message.content[0].text.trim();
     const parsed = JSON.parse(text);
 
-    // Attach full recipe objects to each day
-    const enriched = parsed.plan.map((entry) => {
-      const recipe = recipes.find((r) => r.id === entry.recipeId);
+    const validIds = recipes.map((r) => r.id);
+
+    // Attach full recipe objects; if Claude returns a bad ID, cycle through valid recipes
+    const enriched = parsed.plan.map((entry, i) => {
+      const recipe =
+        recipes.find((r) => r.id === entry.recipeId) ||
+        recipes[i % recipes.length];
       return { day: entry.day, recipe };
     });
 
