@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dinner Planner</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f9f7f4;
+      --card: #fff;
+      --border: #e5e0d8;
+      --accent: #c8622a;
+      --accent-hover: #b05524;
+      --text: #2c2a27;
+      --muted: #7a7570;
+      --tag-bg: #f0ebe3;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    header {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    header h1 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      padding: 16px 0;
+      white-space: nowrap;
+    }
+
+    nav { display: flex; gap: 4px; }
+
+    nav button {
+      background: none;
+      border: none;
+      padding: 18px 16px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      color: var(--muted);
+      border-bottom: 3px solid transparent;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    nav button.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+      font-weight: 600;
+    }
+
+    nav button:hover:not(.active) { color: var(--text); }
+
+    main { max-width: 960px; margin: 0 auto; padding: 32px 24px; }
+
+    .tab { display: none; }
+    .tab.active { display: block; }
+
+    /* Recipes tab */
+    .recipes-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .recipes-header p { color: var(--muted); font-size: 0.9rem; }
+
+    .recipe-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .recipe-card {
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      cursor: pointer;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      user-select: none;
+    }
+
+    .recipe-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+
+    .recipe-card.selected {
+      border-color: var(--accent);
+      background: #fdf5f0;
+    }
+
+    .recipe-card .check {
+      width: 22px; height: 22px;
+      border: 2px solid var(--border);
+      border-radius: 50%;
+      margin-bottom: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem;
+      color: #fff;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .recipe-card.selected .check {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .recipe-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; }
+
+    .recipe-card .tag {
+      display: inline-block;
+      background: var(--tag-bg);
+      color: var(--muted);
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 99px;
+    }
+
+    /* Week tab */
+    .week-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .week-header p { color: var(--muted); font-size: 0.9rem; }
+
+    .btn {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .btn:hover { background: var(--accent-hover); }
+    .btn:disabled { opacity: 0.5; cursor: default; }
+
+    .btn-ghost {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: border-color 0.15s;
+    }
+
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    .week-grid { display: flex; flex-direction: column; gap: 8px; }
+
+    .day-row {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .day-label {
+      width: 96px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    .day-meal {
+      flex: 1;
+      font-size: 0.95rem;
+    }
+
+    .day-meal .category {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .day-empty {
+      flex: 1;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 18px; height: 18px;
+      border: 2px solid rgba(255,255,255,0.4);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Shopping list tab */
+    .shop-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .shop-header p { color: var(--muted); font-size: 0.9rem; }
+
+    .shop-category { margin-bottom: 24px; }
+
+    .shop-category h3 {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .shop-items { display: flex; flex-direction: column; gap: 2px; }
+
+    .shop-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .shop-item input[type="checkbox"] {
+      width: 17px; height: 17px;
+      accent-color: var(--accent);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .shop-item label {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .shop-item.checked label { color: var(--muted); text-decoration: line-through; }
+
+    .shop-item .amount { color: var(--muted); font-size: 0.85rem; }
+
+    .empty-state {
+      text-align: center;
+      padding: 64px 24px;
+      color: var(--muted);
+    }
+
+    .empty-state h2 { font-size: 1.2rem; margin-bottom: 8px; }
+    .empty-state p { font-size: 0.9rem; }
+
+    /* Modal */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-backdrop.open { display: flex; }
+
+    .modal {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 24px;
+      width: min(480px, 90vw);
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .modal h2 { font-size: 1.1rem; margin-bottom: 4px; }
+    .modal p { color: var(--muted); font-size: 0.85rem; margin-bottom: 20px; }
+
+    .modal-list { display: flex; flex-direction: column; gap: 6px; }
+
+    .modal-recipe-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      text-align: left;
+      cursor: pointer;
+      font-size: 0.9rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: border-color 0.15s;
+    }
+
+    .modal-recipe-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .modal-recipe-btn .tag { font-size: 0.75rem; color: var(--muted); }
+
+    .modal-close {
+      float: right;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: var(--muted);
+      line-height: 1;
+      margin-top: -4px;
+    }
+
+    .error-banner {
+      background: #fde8e8;
+      border: 1px solid #f5c0c0;
+      color: #b91c1c;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Dinner Planner</h1>
+  <nav>
+    <button class="active" data-tab="recipes">Recipes</button>
+    <button data-tab="week">This Week</button>
+    <button data-tab="shopping">Shopping List</button>
+  </nav>
+</header>
+
+<main>
+  <!-- Recipes tab -->
+  <div id="tab-recipes" class="tab active">
+    <div class="recipes-header">
+      <div>
+        <h2>Your Recipes</h2>
+        <p>Select dinners you want this week — we'll fill the rest.</p>
+      </div>
+      <span id="selected-count" style="font-size:0.9rem;color:var(--muted)"></span>
+    </div>
+    <div class="recipe-grid" id="recipe-grid"></div>
+  </div>
+
+  <!-- Week tab -->
+  <div id="tab-week" class="tab">
+    <div class="week-header">
+      <div>
+        <h2>This Week</h2>
+        <p id="week-subtitle">Generate a plan or swap individual meals.</p>
+      </div>
+      <button class="btn" id="generate-btn">Generate Plan</button>
+    </div>
+    <div id="week-error"></div>
+    <div class="week-grid" id="week-grid"></div>
+  </div>
+
+  <!-- Shopping list tab -->
+  <div id="tab-shopping" class="tab">
+    <div class="shop-header">
+      <div>
+        <h2>Shopping List</h2>
+        <p id="shop-subtitle">Based on this week's dinners.</p>
+      </div>
+      <button class="btn-ghost" id="clear-checked-btn">Clear checked</button>
+    </div>
+    <div id="shopping-list"></div>
+  </div>
+</main>
+
+<!-- Swap modal -->
+<div class="modal-backdrop" id="swap-modal">
+  <div class="modal">
+    <button class="modal-close" id="modal-close">×</button>
+    <h2>Swap Meal</h2>
+    <p id="modal-day-label"></p>
+    <div class="modal-list" id="modal-list"></div>
+  </div>
+</div>
+
+<script>
+  const DAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+  const LS = {
+    selected: 'mp_selected',
+    plan: 'mp_plan',
+    checked: 'mp_checked',
+  };
+
+  let recipes = [];
+  let selectedIds = load(LS.selected) || [];
+  let weekPlan = load(LS.plan) || DAYS.map(d => ({ day: d, recipe: null }));
+  let checkedItems = load(LS.checked) || {};
+  let swapTargetDay = null;
+
+  function load(key) {
+    try { return JSON.parse(localStorage.getItem(key)); } catch { return null; }
+  }
+
+  function save(key, val) {
+    localStorage.setItem(key, JSON.stringify(val));
+  }
+
+  // --- Nav ---
+  document.querySelectorAll('nav button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+      if (btn.dataset.tab === 'shopping') renderShopping();
+    });
+  });
+
+  // --- Load recipes ---
+  async function loadRecipes() {
+    const res = await fetch('/recipes.json');
+    recipes = await res.json();
+    renderRecipeGrid();
+    renderWeek();
+  }
+
+  // --- Recipes tab ---
+  function renderRecipeGrid() {
+    const grid = document.getElementById('recipe-grid');
+    grid.innerHTML = recipes.map(r => `
+      <div class="recipe-card ${selectedIds.includes(r.id) ? 'selected' : ''}"
+           data-id="${r.id}" role="checkbox"
+           aria-checked="${selectedIds.includes(r.id)}">
+        <div class="check">${selectedIds.includes(r.id) ? '✓' : ''}</div>
+        <h3>${r.name}</h3>
+        <span class="tag">${r.category}</span>
+      </div>
+    `).join('');
+
+    grid.querySelectorAll('.recipe-card').forEach(card => {
+      card.addEventListener('click', () => toggleRecipe(card.dataset.id));
+    });
+
+    updateSelectedCount();
+  }
+
+  function toggleRecipe(id) {
+    if (selectedIds.includes(id)) {
+      selectedIds = selectedIds.filter(x => x !== id);
+    } else {
+      selectedIds.push(id);
+    }
+    save(LS.selected, selectedIds);
+    renderRecipeGrid();
+  }
+
+  function updateSelectedCount() {
+    const el = document.getElementById('selected-count');
+    const n = selectedIds.length;
+    el.textContent = n === 0 ? '' : `${n} selected`;
+  }
+
+  // --- Week tab ---
+  function renderWeek() {
+    const grid = document.getElementById('week-grid');
+    grid.innerHTML = weekPlan.map((entry, i) => `
+      <div class="day-row">
+        <span class="day-label">${entry.day}</span>
+        ${entry.recipe
+          ? `<div class="day-meal">
+               <div>${entry.recipe.name}</div>
+               <div class="category">${entry.recipe.category}</div>
+             </div>
+             <button class="btn-ghost" data-day-index="${i}">Swap</button>`
+          : `<div class="day-empty">No meal planned</div>
+             <button class="btn-ghost" data-day-index="${i}">Pick meal</button>`
+        }
+      </div>
+    `).join('');
+
+    grid.querySelectorAll('[data-day-index]').forEach(btn => {
+      btn.addEventListener('click', () => openSwapModal(parseInt(btn.dataset.dayIndex)));
+    });
+  }
+
+  document.getElementById('generate-btn').addEventListener('click', generatePlan);
+
+  async function generatePlan() {
+    const btn = document.getElementById('generate-btn');
+    const errorEl = document.getElementById('week-error');
+    errorEl.innerHTML = '';
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span>Generating…';
+
+    try {
+      const res = await fetch('/api/generate-plan', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ selectedIds }),
+      });
+
+      if (!res.ok) throw new Error('Server error');
+      const data = await res.json();
+      weekPlan = data.plan;
+      save(LS.plan, weekPlan);
+      renderWeek();
+      // Reset shopping checked state when plan changes
+      checkedItems = {};
+      save(LS.checked, checkedItems);
+    } catch (err) {
+      errorEl.innerHTML = `<div class="error-banner">Could not generate plan — check your API key and try again.</div>`;
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Generate Plan';
+    }
+  }
+
+  // --- Swap modal ---
+  function openSwapModal(dayIndex) {
+    swapTargetDay = dayIndex;
+    const entry = weekPlan[dayIndex];
+    document.getElementById('modal-day-label').textContent =
+      `Choose a meal for ${entry.day}`;
+
+    const list = document.getElementById('modal-list');
+    list.innerHTML = recipes.map(r => `
+      <button class="modal-recipe-btn" data-recipe-id="${r.id}">
+        <span>${r.name}</span>
+        <span class="tag">${r.category}</span>
+      </button>
+    `).join('');
+
+    list.querySelectorAll('.modal-recipe-btn').forEach(btn => {
+      btn.addEventListener('click', () => swapMeal(btn.dataset.recipeId));
+    });
+
+    document.getElementById('swap-modal').classList.add('open');
+  }
+
+  function swapMeal(recipeId) {
+    const recipe = recipes.find(r => r.id === recipeId);
+    weekPlan[swapTargetDay].recipe = recipe;
+    save(LS.plan, weekPlan);
+    checkedItems = {};
+    save(LS.checked, checkedItems);
+    closeModal();
+    renderWeek();
+  }
+
+  document.getElementById('modal-close').addEventListener('click', closeModal);
+  document.getElementById('swap-modal').addEventListener('click', e => {
+    if (e.target === e.currentTarget) closeModal();
+  });
+
+  function closeModal() {
+    document.getElementById('swap-modal').classList.remove('open');
+    swapTargetDay = null;
+  }
+
+  // --- Shopping list ---
+  function renderShopping() {
+    const container = document.getElementById('shopping-list');
+    const meals = weekPlan.filter(e => e.recipe);
+
+    if (meals.length === 0) {
+      container.innerHTML = `
+        <div class="empty-state">
+          <h2>No meals planned yet</h2>
+          <p>Generate a plan on the This Week tab first.</p>
+        </div>`;
+      return;
+    }
+
+    // Aggregate ingredients
+    const byCategory = {};
+    meals.forEach(({ recipe }) => {
+      recipe.ingredients.forEach(ing => {
+        const cat = ing.category;
+        if (!byCategory[cat]) byCategory[cat] = [];
+        // Merge duplicates by name
+        const existing = byCategory[cat].find(i => i.name === ing.name);
+        if (existing) {
+          existing.amounts.push(ing.amount);
+        } else {
+          byCategory[cat].push({ name: ing.name, amounts: [ing.amount] });
+        }
+      });
+    });
+
+    const catOrder = ['Meat', 'Seafood', 'Dairy', 'Veg', 'Pantry', 'Other'];
+    const sorted = Object.keys(byCategory).sort(
+      (a, b) => (catOrder.indexOf(a) - catOrder.indexOf(b))
+    );
+
+    const subtitle = document.getElementById('shop-subtitle');
+    subtitle.textContent = `${meals.length} dinner${meals.length > 1 ? 's' : ''} this week`;
+
+    container.innerHTML = sorted.map(cat => {
+      const items = byCategory[cat];
+      return `
+        <div class="shop-category">
+          <h3>${cat}</h3>
+          <div class="shop-items">
+            ${items.map(item => {
+              const key = `${item.name}`;
+              const checked = !!checkedItems[key];
+              const amountStr = [...new Set(item.amounts)].join(' + ');
+              return `
+                <div class="shop-item ${checked ? 'checked' : ''}" data-key="${key}">
+                  <input type="checkbox" id="chk-${key}" ${checked ? 'checked' : ''} />
+                  <label for="chk-${key}">
+                    <span>${item.name}</span>
+                    <span class="amount">${amountStr}</span>
+                  </label>
+                </div>`;
+            }).join('')}
+          </div>
+        </div>`;
+    }).join('');
+
+    container.querySelectorAll('.shop-item').forEach(row => {
+      const key = row.dataset.key;
+      const checkbox = row.querySelector('input');
+      const toggle = () => {
+        checkedItems[key] = !checkedItems[key];
+        save(LS.checked, checkedItems);
+        row.classList.toggle('checked', checkedItems[key]);
+        checkbox.checked = checkedItems[key];
+      };
+      checkbox.addEventListener('change', toggle);
+      row.addEventListener('click', e => {
+        if (e.target !== checkbox) toggle();
+      });
+    });
+  }
+
+  document.getElementById('clear-checked-btn').addEventListener('click', () => {
+    checkedItems = {};
+    save(LS.checked, checkedItems);
+    renderShopping();
+  });
+
+  // Boot
+  loadRecipes();
+</script>
+</body>
+</html>
