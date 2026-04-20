@@ -378,6 +378,13 @@
 
     .shop-item .amount { color: var(--muted); font-size: 0.85rem; }
 
+    .shop-done-section {
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+      margin-top: 4px;
+      opacity: 0.65;
+    }
+
     .empty-state {
       text-align: center;
       padding: 64px 24px;
@@ -605,6 +612,7 @@
     checked: 'mp_checked',
     custom: 'mp_custom',
     cooked: 'mp_cooked',
+    removed: 'mp_removed',
   };
 
   let recipes = [];
@@ -613,6 +621,7 @@
   let checkedItems = load(LS.checked) || {};
   let customItems = load(LS.custom) || [];
   let cookedDays = load(LS.cooked) || [];
+  let removedKeys = load(LS.removed) || [];
   let swapTargetDay = null;
 
   function load(key) {
@@ -799,6 +808,8 @@
       save(LS.cooked, cookedDays);
       checkedItems = {};
       save(LS.checked, checkedItems);
+      removedKeys = [];
+      save(LS.removed, removedKeys);
       renderWeek();
     } catch (err) {
       errorEl.innerHTML = `<div class="error-banner">Could not generate plan: ${err.message}</div>`;
@@ -885,60 +896,69 @@
       (a, b) => (catOrder.indexOf(a) - catOrder.indexOf(b))
     );
 
-    const subtitle = document.getElementById('shop-subtitle');
-    subtitle.textContent = `${meals.length} dinner${meals.length > 1 ? 's' : ''} this week`;
+    document.getElementById('shop-subtitle').textContent =
+      `${meals.length} dinner${meals.length > 1 ? 's' : ''} this week`;
 
-    const customHtml = customItems.length ? `
-      <div class="shop-category">
-        <h3>Extra</h3>
-        <div class="shop-items">
-          ${customItems.map(item => {
-            const key = `custom__${item.id}`;
-            const checked = !!checkedItems[key];
-            return `
-              <div class="shop-item ${checked ? 'checked' : ''}" data-key="${key}">
-                <input type="checkbox" id="chk-${key}" ${checked ? 'checked' : ''} />
-                <label for="chk-${key}"><span>${item.name}</span></label>
-                <button class="remove-btn" data-custom-id="${item.id}" title="Remove">×</button>
-              </div>`;
-          }).join('')}
-        </div>
-      </div>` : '';
-
-    container.innerHTML = sorted.map(cat => {
-      const items = byCategory[cat];
+    const recipeItem = (item) => {
+      const key = item.name;
+      const checked = !!checkedItems[key];
+      const amountStr = [...new Set(item.amounts)].join(' + ');
       return `
-        <div class="shop-category">
-          <h3>${cat}</h3>
-          <div class="shop-items">
-            ${items.map(item => {
-              const key = item.name;
-              const checked = !!checkedItems[key];
-              const amountStr = [...new Set(item.amounts)].join(' + ');
-              return `
-                <div class="shop-item ${checked ? 'checked' : ''}" data-key="${key}">
-                  <input type="checkbox" id="chk-${key}" ${checked ? 'checked' : ''} />
-                  <label for="chk-${key}">
-                    <span class="item-label-left">
-                      <span>${item.name}</span>
-                      <span class="item-meals">${item.recipes.join(' · ')}</span>
-                    </span>
-                    <span class="amount">${amountStr}</span>
-                  </label>
-                </div>`;
-            }).join('')}
-          </div>
+        <div class="shop-item ${checked ? 'checked' : ''}" data-key="${key}">
+          <input type="checkbox" id="chk-${key}" ${checked ? 'checked' : ''} />
+          <label for="chk-${key}">
+            <span class="item-label-left">
+              <span>${item.name}</span>
+              <span class="item-meals">${item.recipes.join(' · ')}</span>
+            </span>
+            <span class="amount">${amountStr}</span>
+          </label>
         </div>`;
-    }).join('') + customHtml;
+    };
+
+    const customItem = (item) => {
+      const key = `custom__${item.id}`;
+      const checked = !!checkedItems[key];
+      return `
+        <div class="shop-item ${checked ? 'checked' : ''}" data-key="${key}">
+          <input type="checkbox" id="chk-${key}" ${checked ? 'checked' : ''} />
+          <label for="chk-${key}"><span>${item.name}</span></label>
+          <button class="remove-btn" data-custom-id="${item.id}" title="Remove">×</button>
+        </div>`;
+    };
+
+    // Split into unchecked (top) and checked/done (bottom)
+    const checkedRecipe = [];
+    const categorySectionsHtml = sorted.map(cat => {
+      const visible = byCategory[cat].filter(i => !removedKeys.includes(i.name));
+      const unchecked = visible.filter(i => !checkedItems[i.name]);
+      visible.filter(i => !!checkedItems[i.name]).forEach(i => checkedRecipe.push(i));
+      if (!unchecked.length) return '';
+      return `<div class="shop-category"><h3>${cat}</h3><div class="shop-items">${unchecked.map(recipeItem).join('')}</div></div>`;
+    }).join('');
+
+    const uncheckedCustom = customItems.filter(i => !checkedItems[`custom__${i.id}`]);
+    const checkedCustom = customItems.filter(i => !!checkedItems[`custom__${i.id}`]);
+
+    const customUncheckedHtml = uncheckedCustom.length
+      ? `<div class="shop-category"><h3>Extra</h3><div class="shop-items">${uncheckedCustom.map(customItem).join('')}</div></div>`
+      : '';
+
+    const doneItems = [...checkedRecipe.map(recipeItem), ...checkedCustom.map(customItem)];
+    const doneHtml = doneItems.length
+      ? `<div class="shop-category shop-done-section"><h3>Done</h3><div class="shop-items">${doneItems.join('')}</div></div>`
+      : '';
+
+    container.innerHTML = categorySectionsHtml + customUncheckedHtml + doneHtml;
 
     container.querySelectorAll('.shop-item').forEach(row => {
       const key = row.dataset.key;
       const checkbox = row.querySelector('input');
       const toggle = () => {
         checkedItems[key] = !checkedItems[key];
+        if (!checkedItems[key]) delete checkedItems[key];
         save(LS.checked, checkedItems);
-        row.classList.toggle('checked', checkedItems[key]);
-        checkbox.checked = checkedItems[key];
+        renderShopping();
       };
       checkbox.addEventListener('change', toggle);
       row.addEventListener('click', e => {
@@ -967,7 +987,15 @@
   });
 
   document.getElementById('clear-checked-btn').addEventListener('click', () => {
+    // Permanently hide checked recipe ingredients until next plan generation
+    Object.keys(checkedItems).forEach(key => {
+      if (checkedItems[key] && !key.startsWith('custom__')) removedKeys.push(key);
+    });
+    // Delete checked custom items entirely
+    customItems = customItems.filter(i => !checkedItems[`custom__${i.id}`]);
     checkedItems = {};
+    save(LS.removed, removedKeys);
+    save(LS.custom, customItems);
     save(LS.checked, checkedItems);
     renderShopping();
   });
