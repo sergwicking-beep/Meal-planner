@@ -472,6 +472,34 @@
     ]
   },
   {
+    "id": "33",
+    "name": "Lasagne",
+    "category": "Vegetarian",
+    "servings": 4,
+    "source": null,
+    "ingredients": [
+      { "name": "sweet potato", "amount": "1 large", "category": "Veg" },
+      { "name": "red peppers", "amount": "2", "category": "Veg" },
+      { "name": "aubergine", "amount": "1", "category": "Veg" },
+      { "name": "chopped tomatoes", "amount": "2 x 400g tins", "category": "Pantry" },
+      { "name": "cheese", "amount": "200g", "category": "Dairy" },
+      { "name": "lasagne sheets", "amount": "250g", "category": "Pantry" },
+      { "name": "butter", "amount": "50g", "category": "Dairy" }
+    ]
+  },
+  {
+    "id": "34",
+    "name": "Fish and Chips",
+    "category": "Seafood",
+    "servings": 2,
+    "source": null,
+    "ingredients": [
+      { "name": "fish cakes", "amount": "4", "category": "Seafood" },
+      { "name": "chips", "amount": "500g", "category": "Veg" },
+      { "name": "tenderstem broccoli", "amount": "200g", "category": "Veg" }
+    ]
+  },
+  {
     "id": "22",
     "name": "Halloumi, Broccoli & Chickpea Bake",
     "category": "Vegetarian",
