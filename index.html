@@ -288,6 +288,41 @@
 
     .shop-item.checked label { color: var(--muted); text-decoration: line-through; }
 
+    .shop-item .remove-btn {
+      background: none;
+      border: none;
+      color: var(--border);
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 0 2px;
+      line-height: 1;
+      flex-shrink: 0;
+      transition: color 0.15s;
+    }
+
+    .shop-item .remove-btn:hover { color: var(--accent); }
+
+    .add-item-form {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .add-item-form input {
+      flex: 1;
+      padding: 9px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      background: var(--card);
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .add-item-form input:focus { border-color: var(--accent); }
+    .add-item-form input::placeholder { color: var(--muted); }
+
     .shop-item .amount { color: var(--muted); font-size: 0.85rem; }
 
     .empty-state {
@@ -412,6 +447,10 @@
       </div>
       <button class="btn-ghost" id="clear-checked-btn">Clear checked</button>
     </div>
+    <form class="add-item-form" id="add-item-form">
+      <input type="text" id="add-item-input" placeholder="Add an item…" autocomplete="off" />
+      <button type="submit" class="btn">Add</button>
+    </form>
     <div id="shopping-list"></div>
   </div>
 </main>
@@ -432,12 +471,14 @@
     selected: 'mp_selected',
     plan: 'mp_plan',
     checked: 'mp_checked',
+    custom: 'mp_custom',
   };
 
   let recipes = [];
   let selectedIds = load(LS.selected) || [];
   let weekPlan = load(LS.plan) || DAYS.map(d => ({ day: d, recipe: null }));
   let checkedItems = load(LS.checked) || {};
+  let customItems = load(LS.custom) || [];
   let swapTargetDay = null;
 
   function load(key) {
@@ -636,6 +677,23 @@
     const subtitle = document.getElementById('shop-subtitle');
     subtitle.textContent = `${meals.length} dinner${meals.length > 1 ? 's' : ''} this week`;
 
+    const customHtml = customItems.length ? `
+      <div class="shop-category">
+        <h3>Extra</h3>
+        <div class="shop-items">
+          ${customItems.map(item => {
+            const key = `custom__${item.id}`;
+            const checked = !!checkedItems[key];
+            return `
+              <div class="shop-item ${checked ? 'checked' : ''}" data-key="${key}">
+                <input type="checkbox" id="chk-${key}" ${checked ? 'checked' : ''} />
+                <label for="chk-${key}"><span>${item.name}</span></label>
+                <button class="remove-btn" data-custom-id="${item.id}" title="Remove">×</button>
+              </div>`;
+          }).join('')}
+        </div>
+      </div>` : '';
+
     container.innerHTML = sorted.map(cat => {
       const items = byCategory[cat];
       return `
@@ -643,7 +701,7 @@
           <h3>${cat}</h3>
           <div class="shop-items">
             ${items.map(item => {
-              const key = `${item.name}`;
+              const key = item.name;
               const checked = !!checkedItems[key];
               const amountStr = [...new Set(item.amounts)].join(' + ');
               return `
@@ -657,7 +715,7 @@
             }).join('')}
           </div>
         </div>`;
-    }).join('');
+    }).join('') + customHtml;
 
     container.querySelectorAll('.shop-item').forEach(row => {
       const key = row.dataset.key;
@@ -670,10 +728,29 @@
       };
       checkbox.addEventListener('change', toggle);
       row.addEventListener('click', e => {
-        if (e.target !== checkbox) toggle();
+        if (e.target !== checkbox && !e.target.classList.contains('remove-btn')) toggle();
+      });
+    });
+
+    container.querySelectorAll('.remove-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        customItems = customItems.filter(i => i.id !== btn.dataset.customId);
+        save(LS.custom, customItems);
+        renderShopping();
       });
     });
   }
+
+  document.getElementById('add-item-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const input = document.getElementById('add-item-input');
+    const name = input.value.trim();
+    if (!name) return;
+    customItems.push({ id: Date.now().toString(), name });
+    save(LS.custom, customItems);
+    input.value = '';
+    renderShopping();
+  });
 
   document.getElementById('clear-checked-btn').addEventListener('click', () => {
     checkedItems = {};
