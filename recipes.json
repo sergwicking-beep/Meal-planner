@@ -248,6 +248,27 @@
     ]
   },
   {
+    "id": "23",
+    "name": "Roasted Tomato & Bay Orzo with Pesto, Courgette & Halloumi",
+    "category": "Vegetarian",
+    "servings": 2,
+    "source": { "book": "The Green Roasting Tin", "page": 28 },
+    "notes": "Base recipe is All-in-one Roasted Tomato & Bay Orzo with Black Pepper. Pesto, courgette and halloumi are personal additions.",
+    "ingredients": [
+      { "name": "orzo", "amount": "200g", "category": "Pantry" },
+      { "name": "vegetable stock", "amount": "400ml", "category": "Pantry" },
+      { "name": "cherry tomatoes on the vine", "amount": "400g", "category": "Veg" },
+      { "name": "red onion", "amount": "½", "category": "Veg" },
+      { "name": "bay leaves", "amount": "2", "category": "Pantry" },
+      { "name": "sea salt", "amount": "2 tsp", "category": "Pantry" },
+      { "name": "extra virgin olive oil", "amount": "2 tbsp", "category": "Pantry" },
+      { "name": "fresh basil or flat-leaf parsley", "amount": "good handful", "category": "Veg" },
+      { "name": "pesto", "amount": "2–3 tbsp", "category": "Pantry" },
+      { "name": "courgette", "amount": "1", "category": "Veg" },
+      { "name": "halloumi", "amount": "200g", "category": "Dairy" }
+    ]
+  },
+  {
     "id": "22",
     "name": "Halloumi, Broccoli & Chickpea Bake",
     "category": "Vegetarian",
