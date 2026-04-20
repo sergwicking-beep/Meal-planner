@@ -101,6 +101,13 @@
       border-radius: 99px;
     }
 
+    .recipe-card .source {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
     /* Recipe picker on week tab */
     .recipe-picker {
       margin-bottom: 24px;
@@ -512,12 +519,17 @@
   // --- Recipes tab (read-only) ---
   function renderRecipeGrid() {
     const grid = document.getElementById('recipe-grid');
-    grid.innerHTML = recipes.map(r => `
-      <div class="recipe-card">
-        <h3>${r.name}</h3>
-        <span class="tag">${r.category}</span>
-      </div>
-    `).join('');
+    grid.innerHTML = recipes.map(r => {
+      const src = r.source
+        ? `${r.source.book}${r.source.page ? `, p.${r.source.page}` : ''}`
+        : '';
+      return `
+        <div class="recipe-card">
+          <h3>${r.name}</h3>
+          <span class="tag">${r.category}</span>
+          ${src ? `<span class="source">${src}</span>` : ''}
+        </div>`;
+    }).join('');
   }
 
   // --- Recipe picker on week tab ---

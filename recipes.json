@@ -4,6 +4,7 @@
     "name": "Spicy Harissa Sprouts & Broccoli with Halloumi",
     "category": "Vegetarian",
     "servings": 4,
+    "source": { "book": "One Pot Planet", "page": null },
     "ingredients": [
       { "name": "broccoli", "amount": "1 head", "category": "Veg" },
       { "name": "Brussels sprouts", "amount": "500g", "category": "Veg" },
@@ -22,6 +23,7 @@
     "name": "Groundnut Stew: Sweet Potato in Peanut & Tomato Sauce",
     "category": "Vegan",
     "servings": 4,
+    "source": { "book": "One Pot Planet", "page": null },
     "ingredients": [
       { "name": "sweet potatoes", "amount": "1kg", "category": "Veg" },
       { "name": "onion", "amount": "1", "category": "Veg" },
@@ -43,6 +45,7 @@
     "name": "Gado Gado: Indonesian Salad with Peanut-Coconut Dressing",
     "category": "Vegan",
     "servings": 2,
+    "source": { "book": "One Pot Planet", "page": null },
     "ingredients": [
       { "name": "Charlotte potatoes", "amount": "1kg", "category": "Veg" },
       { "name": "olive oil", "amount": "2 tbsp", "category": "Pantry" },
@@ -56,6 +59,213 @@
       { "name": "soy sauce", "amount": "1½ tbsp", "category": "Pantry" },
       { "name": "red chilli", "amount": "1", "category": "Veg" },
       { "name": "ginger", "amount": "2.5cm", "category": "Veg" }
+    ]
+  },
+  {
+    "id": "14",
+    "name": "Aubergine & Peanut Stew with Pink Onions",
+    "category": "Vegan",
+    "servings": 4,
+    "source": { "book": "One Pot Planet", "page": null },
+    "ingredients": [
+      { "name": "unsalted red-skinned peanuts", "amount": "150g", "category": "Pantry" },
+      { "name": "aubergines", "amount": "2 medium", "category": "Veg" },
+      { "name": "groundnut oil", "amount": "2 tbsp", "category": "Pantry" },
+      { "name": "onions", "amount": "2", "category": "Veg" },
+      { "name": "ground coriander", "amount": "1 tsp", "category": "Pantry" },
+      { "name": "smoked paprika", "amount": "1 tsp", "category": "Pantry" },
+      { "name": "cayenne pepper", "amount": "½–1 tsp", "category": "Pantry" },
+      { "name": "bay leaves", "amount": "2", "category": "Pantry" },
+      { "name": "fresh coriander", "amount": "small bunch", "category": "Veg" },
+      { "name": "tomatoes", "amount": "6 or 1 x 400g tin", "category": "Veg" },
+      { "name": "tomato purée", "amount": "3 tbsp", "category": "Pantry" },
+      { "name": "Scotch bonnet chilli", "amount": "½–1", "category": "Veg" },
+      { "name": "hot vegetable stock", "amount": "500ml", "category": "Pantry" },
+      { "name": "peanut butter", "amount": "3 tbsp", "category": "Pantry" },
+      { "name": "red onion", "amount": "1", "category": "Veg" },
+      { "name": "caster sugar or honey", "amount": "1 tbsp", "category": "Pantry" },
+      { "name": "red wine vinegar", "amount": "2 tbsp", "category": "Pantry" }
+    ]
+  },
+  {
+    "id": "15",
+    "name": "Muhammara Chickpea Stew",
+    "category": "Vegan",
+    "servings": 4,
+    "source": { "book": "One Pot Planet", "page": null },
+    "ingredients": [
+      { "name": "walnuts or almonds", "amount": "75g", "category": "Pantry" },
+      { "name": "cumin seeds", "amount": "1 tsp", "category": "Pantry" },
+      { "name": "roasted red peppers", "amount": "1 x 200g jar", "category": "Veg" },
+      { "name": "tomato purée", "amount": "2 tbsp", "category": "Pantry" },
+      { "name": "pomegranate molasses", "amount": "2 tbsp", "category": "Pantry" },
+      { "name": "Turkish chilli flakes", "amount": "1 tsp", "category": "Pantry" },
+      { "name": "lemon", "amount": "1 unwaxed", "category": "Veg" },
+      { "name": "extra virgin olive oil", "amount": "4 tbsp", "category": "Pantry" },
+      { "name": "chickpeas or cannellini beans", "amount": "2 x 400g tins", "category": "Pantry" },
+      { "name": "hot vegetable stock", "amount": "500ml", "category": "Pantry" },
+      { "name": "kale or greens", "amount": "200g", "category": "Veg" }
+    ]
+  },
+  {
+    "id": "16",
+    "name": "Green Pepper & Pistachio Risotto",
+    "category": "Vegetarian",
+    "servings": 4,
+    "source": { "book": "One Pot Planet", "page": null },
+    "ingredients": [
+      { "name": "green peppers", "amount": "4", "category": "Veg" },
+      { "name": "shelled pistachios", "amount": "75g", "category": "Pantry" },
+      { "name": "garlic", "amount": "3 cloves", "category": "Veg" },
+      { "name": "lemon", "amount": "1 unwaxed", "category": "Veg" },
+      { "name": "extra virgin olive oil", "amount": "100ml + 2 tbsp", "category": "Pantry" },
+      { "name": "basil leaves", "amount": "50g", "category": "Veg" },
+      { "name": "vegetarian Pecorino or Parmesan", "amount": "30g", "category": "Dairy" },
+      { "name": "vegetable stock", "amount": "1–1.5 litres", "category": "Pantry" },
+      { "name": "white onion", "amount": "1", "category": "Veg" },
+      { "name": "arborio or carnaroli rice", "amount": "400g", "category": "Pantry" },
+      { "name": "white wine", "amount": "200ml", "category": "Pantry" },
+      { "name": "butter", "amount": "50g", "category": "Dairy" }
+    ]
+  },
+  {
+    "id": "17",
+    "name": "Aubergine Curry with Basil & Tamarind",
+    "category": "Vegan",
+    "servings": 4,
+    "source": { "book": "One Pot Planet", "page": null },
+    "ingredients": [
+      { "name": "coconut or groundnut oil", "amount": "2 tbsp", "category": "Pantry" },
+      { "name": "aubergines", "amount": "4 medium", "category": "Veg" },
+      { "name": "banana shallots", "amount": "4", "category": "Veg" },
+      { "name": "ginger", "amount": "5cm piece", "category": "Veg" },
+      { "name": "garlic", "amount": "3 cloves", "category": "Veg" },
+      { "name": "lemongrass", "amount": "1 stick", "category": "Veg" },
+      { "name": "lime leaves", "amount": "2", "category": "Veg" },
+      { "name": "red chilli", "amount": "1", "category": "Veg" },
+      { "name": "ground coriander", "amount": "1 tsp", "category": "Pantry" },
+      { "name": "vine tomatoes or chopped tomatoes", "amount": "300g or 400g tin", "category": "Veg" },
+      { "name": "tamarind paste", "amount": "2 tbsp", "category": "Pantry" },
+      { "name": "coconut milk", "amount": "1 x 400ml tin", "category": "Pantry" },
+      { "name": "sticky jasmine rice", "amount": "300g", "category": "Pantry" },
+      { "name": "Thai basil", "amount": "small bunch", "category": "Veg" }
+    ]
+  },
+  {
+    "id": "18",
+    "name": "Crispy Tofu & Broccoli Pad Thai",
+    "category": "Vegan",
+    "servings": 4,
+    "source": { "book": "One Pot Planet", "page": 90 },
+    "ingredients": [
+      { "name": "flat wide rice noodles", "amount": "250g", "category": "Pantry" },
+      { "name": "firm tofu", "amount": "250g block", "category": "Pantry" },
+      { "name": "soy or tamari sauce", "amount": "2 tbsp", "category": "Pantry" },
+      { "name": "coconut oil or neutral oil", "amount": "for frying", "category": "Pantry" },
+      { "name": "purple-sprouting broccoli", "amount": "250g", "category": "Veg" },
+      { "name": "beansprouts", "amount": "100g", "category": "Veg" },
+      { "name": "eggs (optional)", "amount": "2", "category": "Dairy" },
+      { "name": "spring onions", "amount": "6", "category": "Veg" },
+      { "name": "ginger", "amount": "2cm piece", "category": "Veg" },
+      { "name": "garlic", "amount": "3 cloves", "category": "Veg" },
+      { "name": "tamarind paste", "amount": "4 tbsp", "category": "Pantry" },
+      { "name": "maple syrup", "amount": "3 tbsp", "category": "Pantry" },
+      { "name": "light soy sauce", "amount": "4 tbsp", "category": "Pantry" },
+      { "name": "vegetarian fish sauce", "amount": "1 tbsp", "category": "Pantry" },
+      { "name": "roasted unsalted peanuts", "amount": "100g", "category": "Pantry" },
+      { "name": "limes", "amount": "2", "category": "Veg" }
+    ]
+  },
+  {
+    "id": "19",
+    "name": "Lime & Double Ginger Soba Noodles",
+    "category": "Vegan",
+    "servings": 2,
+    "source": { "book": "One Pot Planet", "page": 177 },
+    "ingredients": [
+      { "name": "dried soba noodles", "amount": "200g", "category": "Pantry" },
+      { "name": "extra-firm tofu", "amount": "200g", "category": "Pantry" },
+      { "name": "broccoli", "amount": "100g", "category": "Veg" },
+      { "name": "radishes", "amount": "handful", "category": "Veg" },
+      { "name": "spring onions", "amount": "1 bunch", "category": "Veg" },
+      { "name": "mixed seeds", "amount": "100g", "category": "Pantry" },
+      { "name": "pickled sushi ginger", "amount": "2 tbsp (optional)", "category": "Pantry" },
+      { "name": "lime", "amount": "1 unwaxed", "category": "Veg" },
+      { "name": "fresh coriander", "amount": "small bunch", "category": "Veg" },
+      { "name": "ginger", "amount": "large thumb-sized piece", "category": "Veg" },
+      { "name": "honey or maple syrup", "amount": "1 tbsp", "category": "Pantry" },
+      { "name": "soy sauce", "amount": "1 tbsp", "category": "Pantry" },
+      { "name": "rapeseed oil", "amount": "2 tbsp", "category": "Pantry" }
+    ]
+  },
+  {
+    "id": "20",
+    "name": "Flash-Fried Sticky Tofu",
+    "category": "Vegan",
+    "servings": 4,
+    "source": { "book": "One Pot Planet", "page": 186 },
+    "ingredients": [
+      { "name": "jasmine rice", "amount": "350g", "category": "Pantry" },
+      { "name": "firm smoked tofu", "amount": "400g", "category": "Pantry" },
+      { "name": "groundnut or vegetable oil", "amount": "2 tbsp", "category": "Pantry" },
+      { "name": "light soy sauce", "amount": "2 tbsp", "category": "Pantry" },
+      { "name": "honey or maple syrup", "amount": "small squeeze", "category": "Pantry" },
+      { "name": "garlic", "amount": "2 cloves", "category": "Veg" },
+      { "name": "ginger", "amount": "2cm piece", "category": "Veg" },
+      { "name": "spring onions", "amount": "4", "category": "Veg" },
+      { "name": "green beans", "amount": "2 big handfuls (400g)", "category": "Veg" },
+      { "name": "Sichuan peppercorns", "amount": "½ tsp", "category": "Pantry" },
+      { "name": "celery", "amount": "1 stick", "category": "Veg" },
+      { "name": "sesame oil", "amount": "2 tbsp", "category": "Pantry" },
+      { "name": "dried chilli flakes", "amount": "¼ tsp", "category": "Pantry" },
+      { "name": "toasted sesame seeds", "amount": "4 tbsp", "category": "Pantry" }
+    ]
+  },
+  {
+    "id": "21",
+    "name": "Greens & Caramelised Tofu with XO Sauce",
+    "category": "Vegan",
+    "servings": 2,
+    "source": { "book": "One Pot Planet", "page": 203 },
+    "ingredients": [
+      { "name": "extra-firm tofu", "amount": "200g", "category": "Pantry" },
+      { "name": "vegetable oil", "amount": "for frying", "category": "Pantry" },
+      { "name": "garlic", "amount": "2 cloves", "category": "Veg" },
+      { "name": "spring onions", "amount": "1 bunch", "category": "Veg" },
+      { "name": "ginger", "amount": "thumb-sized piece", "category": "Veg" },
+      { "name": "cavolo nero", "amount": "1 head", "category": "Veg" },
+      { "name": "soy sauce", "amount": "2 tsp", "category": "Pantry" },
+      { "name": "corn on the cob or frozen kernels", "amount": "1 cob or 200g", "category": "Veg" },
+      { "name": "rice wine vinegar", "amount": "1 tsp", "category": "Pantry" },
+      { "name": "red onion", "amount": "1", "category": "Veg" },
+      { "name": "red chillies", "amount": "2", "category": "Veg" },
+      { "name": "dried chilli flakes", "amount": "⅓ tsp", "category": "Pantry" },
+      { "name": "smoked paprika", "amount": "1 tsp", "category": "Pantry" },
+      { "name": "honey or maple syrup", "amount": "3 tbsp", "category": "Pantry" },
+      { "name": "sesame oil", "amount": "1 tbsp", "category": "Pantry" },
+      { "name": "toasted sesame seeds", "amount": "2 tbsp", "category": "Pantry" },
+      { "name": "brown rice", "amount": "300g", "category": "Pantry" }
+    ]
+  },
+  {
+    "id": "22",
+    "name": "Halloumi, Broccoli & Chickpea Bake",
+    "category": "Vegetarian",
+    "servings": 4,
+    "source": { "book": "One Pot Planet", "page": 271 },
+    "ingredients": [
+      { "name": "chickpeas", "amount": "2 x 400g tins", "category": "Pantry" },
+      { "name": "ras el hanout", "amount": "1 heaped tsp", "category": "Pantry" },
+      { "name": "orange", "amount": "1 unwaxed", "category": "Veg" },
+      { "name": "halloumi", "amount": "200g block", "category": "Dairy" },
+      { "name": "tahini", "amount": "3 tbsp", "category": "Pantry" },
+      { "name": "purple-sprouting broccoli", "amount": "250g", "category": "Veg" },
+      { "name": "olive oil", "amount": "2 tbsp", "category": "Pantry" },
+      { "name": "fresh parsley", "amount": "small bunch", "category": "Veg" },
+      { "name": "pomegranate seeds", "amount": "handful", "category": "Veg" },
+      { "name": "pumpkin seeds", "amount": "large handful", "category": "Pantry" },
+      { "name": "honey or maple syrup", "amount": "1 heaped tsp", "category": "Pantry" },
+      { "name": "flatbreads", "amount": "4", "category": "Pantry" }
     ]
   }
 ]
