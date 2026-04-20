@@ -4,7 +4,7 @@
     "name": "Spicy Harissa Sprouts & Broccoli with Halloumi",
     "category": "Vegetarian",
     "servings": 4,
-    "source": { "book": "One Pot Planet", "page": null },
+    "source": { "book": "The Green Roasting Tin", "page": 142 },
     "ingredients": [
       { "name": "broccoli", "amount": "1 head", "category": "Veg" },
       { "name": "Brussels sprouts", "amount": "500g", "category": "Veg" },
@@ -23,7 +23,7 @@
     "name": "Groundnut Stew: Sweet Potato in Peanut & Tomato Sauce",
     "category": "Vegan",
     "servings": 4,
-    "source": { "book": "One Pot Planet", "page": null },
+    "source": { "book": "The Green Roasting Tin", "page": 100 },
     "ingredients": [
       { "name": "sweet potatoes", "amount": "1kg", "category": "Veg" },
       { "name": "onion", "amount": "1", "category": "Veg" },
@@ -45,7 +45,7 @@
     "name": "Gado Gado: Indonesian Salad with Peanut-Coconut Dressing",
     "category": "Vegan",
     "servings": 2,
-    "source": { "book": "One Pot Planet", "page": null },
+    "source": { "book": "The Green Roasting Tin", "page": 94 },
     "ingredients": [
       { "name": "Charlotte potatoes", "amount": "1kg", "category": "Veg" },
       { "name": "olive oil", "amount": "2 tbsp", "category": "Pantry" },
@@ -66,7 +66,7 @@
     "name": "Aubergine & Peanut Stew with Pink Onions",
     "category": "Vegan",
     "servings": 4,
-    "source": { "book": "One Pot Planet", "page": null },
+    "source": { "book": "One Pot Planet", "page": 29 },
     "ingredients": [
       { "name": "unsalted red-skinned peanuts", "amount": "150g", "category": "Pantry" },
       { "name": "aubergines", "amount": "2 medium", "category": "Veg" },
@@ -92,7 +92,7 @@
     "name": "Muhammara Chickpea Stew",
     "category": "Vegan",
     "servings": 4,
-    "source": { "book": "One Pot Planet", "page": null },
+    "source": { "book": "One Pot Planet", "page": 31 },
     "ingredients": [
       { "name": "walnuts or almonds", "amount": "75g", "category": "Pantry" },
       { "name": "cumin seeds", "amount": "1 tsp", "category": "Pantry" },
@@ -112,7 +112,7 @@
     "name": "Green Pepper & Pistachio Risotto",
     "category": "Vegetarian",
     "servings": 4,
-    "source": { "book": "One Pot Planet", "page": null },
+    "source": { "book": "One Pot Planet", "page": 35 },
     "ingredients": [
       { "name": "green peppers", "amount": "4", "category": "Veg" },
       { "name": "shelled pistachios", "amount": "75g", "category": "Pantry" },
@@ -133,7 +133,7 @@
     "name": "Aubergine Curry with Basil & Tamarind",
     "category": "Vegan",
     "servings": 4,
-    "source": { "book": "One Pot Planet", "page": null },
+    "source": { "book": "One Pot Planet", "page": 41 },
     "ingredients": [
       { "name": "coconut or groundnut oil", "amount": "2 tbsp", "category": "Pantry" },
       { "name": "aubergines", "amount": "4 medium", "category": "Veg" },
