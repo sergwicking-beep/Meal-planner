@@ -199,14 +199,33 @@
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 16px 20px;
+      padding: 12px 16px;
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 12px;
+      transition: border-color 0.15s, background 0.15s, opacity 0.15s;
     }
 
+    .day-row.drag-over { border-color: var(--accent); background: #fdf5f0; }
+    .day-row.dragging { opacity: 0.35; }
+
+    .tick-btn {
+      width: 26px; height: 26px;
+      border: 2px solid var(--border);
+      border-radius: 50%;
+      background: none;
+      cursor: pointer;
+      font-size: 0.75rem;
+      color: transparent;
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.15s;
+    }
+    .tick-btn:hover { border-color: #22c55e; color: #ccc; }
+    .tick-btn.ticked { background: #22c55e; border-color: #22c55e; color: #fff; }
+
     .day-label {
-      width: 96px;
+      width: 88px;
       font-weight: 600;
       font-size: 0.9rem;
       flex-shrink: 0;
@@ -222,12 +241,25 @@
       color: var(--muted);
     }
 
+    .day-row.cooked .day-meal { opacity: 0.45; text-decoration: line-through; }
+
     .day-empty {
       flex: 1;
       color: var(--muted);
       font-size: 0.9rem;
       font-style: italic;
     }
+
+    .drag-handle {
+      cursor: grab;
+      color: var(--border);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      user-select: none;
+      padding: 0 2px;
+      line-height: 1;
+    }
+    .drag-handle:hover { color: var(--muted); }
 
     .spinner {
       display: inline-block;
@@ -519,6 +551,7 @@
     plan: 'mp_plan',
     checked: 'mp_checked',
     custom: 'mp_custom',
+    cooked: 'mp_cooked',
   };
 
   let recipes = [];
@@ -526,6 +559,7 @@
   let weekPlan = load(LS.plan) || DAYS.map(d => ({ day: d, recipe: null }));
   let checkedItems = load(LS.checked) || {};
   let customItems = load(LS.custom) || [];
+  let cookedDays = load(LS.cooked) || [];
   let swapTargetDay = null;
 
   function load(key) {
@@ -601,23 +635,71 @@
   // --- Week tab ---
   function renderWeek() {
     const grid = document.getElementById('week-grid');
-    grid.innerHTML = weekPlan.map((entry, i) => `
-      <div class="day-row">
-        <span class="day-label">${entry.day}</span>
-        ${entry.recipe
-          ? `<div class="day-meal">
-               <div>${entry.recipe.name}</div>
-               <div class="category">${entry.recipe.category}</div>
-             </div>
-             <button class="btn-ghost" data-day-index="${i}">Swap</button>`
-          : `<div class="day-empty">No meal planned</div>
-             <button class="btn-ghost" data-day-index="${i}">Pick meal</button>`
-        }
-      </div>
-    `).join('');
+    grid.innerHTML = weekPlan.map((entry, i) => {
+      const cooked = cookedDays.includes(entry.day);
+      return `
+        <div class="day-row ${cooked ? 'cooked' : ''}" data-drag-index="${i}" draggable="true">
+          <button class="tick-btn ${cooked ? 'ticked' : ''}" data-tick="${i}" title="Mark as cooked">✓</button>
+          <span class="day-label">${entry.day}</span>
+          ${entry.recipe
+            ? `<div class="day-meal">
+                 <div>${entry.recipe.name}</div>
+                 <div class="category">${entry.recipe.category}</div>
+               </div>
+               <button class="btn-ghost swap-btn" data-swap="${i}">Swap</button>`
+            : `<div class="day-empty">No meal planned</div>
+               <button class="btn-ghost swap-btn" data-swap="${i}">Pick meal</button>`
+          }
+          <span class="drag-handle" title="Drag to move">⠿</span>
+        </div>`;
+    }).join('');
 
-    grid.querySelectorAll('[data-day-index]').forEach(btn => {
-      btn.addEventListener('click', () => openSwapModal(parseInt(btn.dataset.dayIndex)));
+    // Tick handlers
+    grid.querySelectorAll('.tick-btn').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        const day = weekPlan[parseInt(btn.dataset.tick)].day;
+        cookedDays = cookedDays.includes(day)
+          ? cookedDays.filter(d => d !== day)
+          : [...cookedDays, day];
+        save(LS.cooked, cookedDays);
+        renderWeek();
+      });
+    });
+
+    // Swap handlers
+    grid.querySelectorAll('.swap-btn').forEach(btn => {
+      btn.addEventListener('click', () => openSwapModal(parseInt(btn.dataset.swap)));
+    });
+
+    // Drag-and-drop reorder
+    let dragSrc = null;
+    grid.querySelectorAll('.day-row').forEach(row => {
+      row.addEventListener('dragstart', e => {
+        dragSrc = parseInt(row.dataset.dragIndex);
+        setTimeout(() => row.classList.add('dragging'), 0);
+        e.dataTransfer.effectAllowed = 'move';
+      });
+      row.addEventListener('dragend', () => {
+        row.classList.remove('dragging');
+        grid.querySelectorAll('.day-row').forEach(r => r.classList.remove('drag-over'));
+      });
+      row.addEventListener('dragover', e => {
+        e.preventDefault();
+        grid.querySelectorAll('.day-row').forEach(r => r.classList.remove('drag-over'));
+        row.classList.add('drag-over');
+      });
+      row.addEventListener('dragleave', () => row.classList.remove('drag-over'));
+      row.addEventListener('drop', e => {
+        e.preventDefault();
+        const dropIdx = parseInt(row.dataset.dragIndex);
+        if (dragSrc === null || dragSrc === dropIdx) return;
+        const tmp = weekPlan[dragSrc].recipe;
+        weekPlan[dragSrc].recipe = weekPlan[dropIdx].recipe;
+        weekPlan[dropIdx].recipe = tmp;
+        save(LS.plan, weekPlan);
+        renderWeek();
+      });
     });
   }
 
@@ -641,10 +723,11 @@
       if (!res.ok) throw new Error(data.error || 'Server error');
       weekPlan = data.plan;
       save(LS.plan, weekPlan);
-      renderWeek();
-      // Reset shopping checked state when plan changes
+      cookedDays = [];
+      save(LS.cooked, cookedDays);
       checkedItems = {};
       save(LS.checked, checkedItems);
+      renderWeek();
     } catch (err) {
       errorEl.innerHTML = `<div class="error-banner">Could not generate plan: ${err.message}</div>`;
     } finally {
