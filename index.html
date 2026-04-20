@@ -272,6 +272,9 @@
 
     .action-link:hover { color: var(--accent-hover); }
 
+    .item-label-left { display: flex; flex-direction: column; gap: 1px; }
+    .item-meals { font-size: 0.72rem; color: var(--muted); font-style: italic; }
+
     .spinner {
       display: inline-block;
       width: 18px; height: 18px;
@@ -699,6 +702,7 @@
                    <span class="meal-actions">
                      <button class="action-link swap-btn" data-swap="${i}">Swap</button>
                      <button class="action-link move-btn" data-move="${i}">Move</button>
+                     <button class="action-link clear-btn" data-clear="${i}">Clear</button>
                    </span>
                  </div>
                </div>`
@@ -729,6 +733,15 @@
 
     grid.querySelectorAll('.move-btn').forEach(btn => {
       btn.addEventListener('click', () => openMoveModal(parseInt(btn.dataset.move)));
+    });
+
+    grid.querySelectorAll('.clear-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const i = parseInt(btn.dataset.clear);
+        weekPlan[i].recipe = null;
+        save(LS.plan, weekPlan);
+        renderWeek();
+      });
     });
   }
 
@@ -857,12 +870,12 @@
       recipe.ingredients.forEach(ing => {
         const cat = ing.category;
         if (!byCategory[cat]) byCategory[cat] = [];
-        // Merge duplicates by name
         const existing = byCategory[cat].find(i => i.name === ing.name);
         if (existing) {
           existing.amounts.push(ing.amount);
+          if (!existing.recipes.includes(recipe.name)) existing.recipes.push(recipe.name);
         } else {
-          byCategory[cat].push({ name: ing.name, amounts: [ing.amount] });
+          byCategory[cat].push({ name: ing.name, amounts: [ing.amount], recipes: [recipe.name] });
         }
       });
     });
@@ -906,7 +919,10 @@
                 <div class="shop-item ${checked ? 'checked' : ''}" data-key="${key}">
                   <input type="checkbox" id="chk-${key}" ${checked ? 'checked' : ''} />
                   <label for="chk-${key}">
-                    <span>${item.name}</span>
+                    <span class="item-label-left">
+                      <span>${item.name}</span>
+                      <span class="item-meals">${item.recipes.join(' · ')}</span>
+                    </span>
                     <span class="amount">${amountStr}</span>
                   </label>
                 </div>`;
