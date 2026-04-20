@@ -388,6 +388,90 @@
     ]
   },
   {
+    "id": "29",
+    "name": "Beetroot, Chickpea & Coconut Curry",
+    "category": "Vegan",
+    "servings": 2,
+    "source": { "book": "The Green Roasting Tin", "page": 104 },
+    "ingredients": [
+      { "name": "onion", "amount": "1", "category": "Veg" },
+      { "name": "beetroot", "amount": "600g", "category": "Veg" },
+      { "name": "chickpeas", "amount": "1 x 400g tin", "category": "Pantry" },
+      { "name": "garlic", "amount": "2 cloves", "category": "Veg" },
+      { "name": "ginger", "amount": "5cm", "category": "Veg" },
+      { "name": "red chilli", "amount": "1", "category": "Veg" },
+      { "name": "ground cumin", "amount": "1 heaped tsp", "category": "Pantry" },
+      { "name": "ground coriander", "amount": "1 heaped tsp", "category": "Pantry" },
+      { "name": "ground ginger", "amount": "1 heaped tsp", "category": "Pantry" },
+      { "name": "ground turmeric", "amount": "½ tsp", "category": "Pantry" },
+      { "name": "vegetable oil", "amount": "1 tbsp", "category": "Pantry" },
+      { "name": "sea salt", "amount": "1 tsp", "category": "Pantry" },
+      { "name": "coconut milk", "amount": "1 x 400g tin", "category": "Pantry" },
+      { "name": "basmati rice or naan", "amount": "300g rice", "category": "Pantry" },
+      { "name": "fresh coriander", "amount": "handful", "category": "Veg" }
+    ]
+  },
+  {
+    "id": "30",
+    "name": "Caponata Style Aubergines with Olives, Capers & Tomatoes",
+    "category": "Vegan",
+    "servings": 4,
+    "source": { "book": "The Green Roasting Tin", "page": 114 },
+    "ingredients": [
+      { "name": "baby aubergines", "amount": "800g", "category": "Veg" },
+      { "name": "red onion", "amount": "1", "category": "Veg" },
+      { "name": "olive oil", "amount": "2 tbsp", "category": "Pantry" },
+      { "name": "sea salt", "amount": "2 tsp", "category": "Pantry" },
+      { "name": "garlic", "amount": "2 cloves", "category": "Veg" },
+      { "name": "fresh rosemary", "amount": "3 sprigs", "category": "Veg" },
+      { "name": "capers", "amount": "25g", "category": "Pantry" },
+      { "name": "pitted green olives", "amount": "75g", "category": "Pantry" },
+      { "name": "chopped tomatoes", "amount": "2 x 400g tins", "category": "Pantry" },
+      { "name": "red wine vinegar", "amount": "2 tsp", "category": "Pantry" },
+      { "name": "fresh basil", "amount": "25g", "category": "Veg" },
+      { "name": "toasted almonds", "amount": "30g", "category": "Pantry" },
+      { "name": "bulgur wheat or focaccia", "amount": "300g", "category": "Pantry" }
+    ]
+  },
+  {
+    "id": "31",
+    "name": "Storecupboard Pasta Bake: Crispy Red Pepper & Cannellini Beans with Blue Cheese",
+    "category": "Vegetarian",
+    "servings": 3,
+    "source": { "book": "The Green Roasting Tin", "page": 154 },
+    "ingredients": [
+      { "name": "vine tomatoes", "amount": "300g", "category": "Veg" },
+      { "name": "macaroni or ditalini", "amount": "200g", "category": "Pantry" },
+      { "name": "olive oil", "amount": "2 tbsp", "category": "Pantry" },
+      { "name": "fresh dill", "amount": "25g", "category": "Veg" },
+      { "name": "fresh flat-leaf parsley", "amount": "25g", "category": "Veg" },
+      { "name": "roasted red peppers", "amount": "1 x 450g jar", "category": "Veg" },
+      { "name": "pitted black olives", "amount": "160g", "category": "Pantry" },
+      { "name": "cannellini beans", "amount": "1 x 400g tin", "category": "Pantry" },
+      { "name": "spring onions", "amount": "3", "category": "Veg" },
+      { "name": "smoked paprika", "amount": "2 tsp", "category": "Pantry" },
+      { "name": "lemon", "amount": "½", "category": "Veg" },
+      { "name": "blue cheese", "amount": "100g", "category": "Dairy" },
+      { "name": "sea salt", "amount": "1 tsp", "category": "Pantry" },
+      { "name": "panko breadcrumbs", "amount": "50g", "category": "Pantry" }
+    ]
+  },
+  {
+    "id": "32",
+    "name": "Mediterranean Courgettes Roasted with Olives, Feta & Tomatoes",
+    "category": "Vegetarian",
+    "servings": 4,
+    "source": { "book": "The Green Roasting Tin", "page": 174 },
+    "ingredients": [
+      { "name": "courgettes", "amount": "6 large", "category": "Veg" },
+      { "name": "feta cheese", "amount": "200g", "category": "Dairy" },
+      { "name": "sunblush tomatoes in olive oil", "amount": "140g", "category": "Veg" },
+      { "name": "black olives", "amount": "120g", "category": "Pantry" },
+      { "name": "panko breadcrumbs", "amount": "40g", "category": "Pantry" },
+      { "name": "couscous", "amount": "300g", "category": "Pantry" }
+    ]
+  },
+  {
     "id": "22",
     "name": "Halloumi, Broccoli & Chickpea Bake",
     "category": "Vegetarian",
