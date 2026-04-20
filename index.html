@@ -755,11 +755,11 @@
       `Move ${srcDay}'s meal to which day?`;
     const list = document.getElementById('modal-list');
     list.innerHTML = weekPlan
-      .filter((_, i) => i !== srcIndex && weekPlan[i].recipe)
+      .filter((_, i) => i !== srcIndex)
       .map(entry => `
         <button class="modal-recipe-btn" data-move-to="${DAYS.indexOf(entry.day)}">
           <span>${entry.day}</span>
-          <span class="tag">${entry.recipe.name}</span>
+          <span class="tag">${entry.recipe ? entry.recipe.name : '— free —'}</span>
         </button>`).join('');
     list.querySelectorAll('.modal-recipe-btn').forEach(btn => {
       btn.addEventListener('click', () => {
