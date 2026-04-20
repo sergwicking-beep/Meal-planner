@@ -206,9 +206,6 @@
       transition: border-color 0.15s, background 0.15s, opacity 0.15s;
     }
 
-    .day-row.drag-over { border-color: var(--accent); background: #fdf5f0; }
-    .day-row.dragging { opacity: 0.35; }
-
     .tick-btn {
       width: 26px; height: 26px;
       border: 2px solid var(--border);
@@ -250,16 +247,6 @@
       font-style: italic;
     }
 
-    .drag-handle {
-      cursor: grab;
-      color: var(--border);
-      font-size: 1.1rem;
-      flex-shrink: 0;
-      user-select: none;
-      padding: 0 2px;
-      line-height: 1;
-    }
-    .drag-handle:hover { color: var(--muted); }
 
     .spinner {
       display: inline-block;
@@ -638,7 +625,7 @@
     grid.innerHTML = weekPlan.map((entry, i) => {
       const cooked = cookedDays.includes(entry.day);
       return `
-        <div class="day-row ${cooked ? 'cooked' : ''}" data-drag-index="${i}" draggable="true">
+        <div class="day-row ${cooked ? 'cooked' : ''}">
           <button class="tick-btn ${cooked ? 'ticked' : ''}" data-tick="${i}" title="Mark as cooked">✓</button>
           <span class="day-label">${entry.day}</span>
           ${entry.recipe
@@ -646,18 +633,16 @@
                  <div>${entry.recipe.name}</div>
                  <div class="category">${entry.recipe.category}</div>
                </div>
-               <button class="btn-ghost swap-btn" data-swap="${i}">Swap</button>`
+               <button class="btn-ghost swap-btn" data-swap="${i}">Swap</button>
+               <button class="btn-ghost move-btn" data-move="${i}">Move</button>`
             : `<div class="day-empty">No meal planned</div>
-               <button class="btn-ghost swap-btn" data-swap="${i}">Pick meal</button>`
+               <button class="btn-ghost swap-btn" data-swap="${i}">Pick</button>`
           }
-          <span class="drag-handle" title="Drag to move">⠿</span>
         </div>`;
     }).join('');
 
-    // Tick handlers
     grid.querySelectorAll('.tick-btn').forEach(btn => {
-      btn.addEventListener('click', e => {
-        e.stopPropagation();
+      btn.addEventListener('click', () => {
         const day = weekPlan[parseInt(btn.dataset.tick)].day;
         cookedDays = cookedDays.includes(day)
           ? cookedDays.filter(d => d !== day)
@@ -667,40 +652,43 @@
       });
     });
 
-    // Swap handlers
     grid.querySelectorAll('.swap-btn').forEach(btn => {
       btn.addEventListener('click', () => openSwapModal(parseInt(btn.dataset.swap)));
     });
 
-    // Drag-and-drop reorder
-    let dragSrc = null;
-    grid.querySelectorAll('.day-row').forEach(row => {
-      row.addEventListener('dragstart', e => {
-        dragSrc = parseInt(row.dataset.dragIndex);
-        setTimeout(() => row.classList.add('dragging'), 0);
-        e.dataTransfer.effectAllowed = 'move';
-      });
-      row.addEventListener('dragend', () => {
-        row.classList.remove('dragging');
-        grid.querySelectorAll('.day-row').forEach(r => r.classList.remove('drag-over'));
-      });
-      row.addEventListener('dragover', e => {
-        e.preventDefault();
-        grid.querySelectorAll('.day-row').forEach(r => r.classList.remove('drag-over'));
-        row.classList.add('drag-over');
-      });
-      row.addEventListener('dragleave', () => row.classList.remove('drag-over'));
-      row.addEventListener('drop', e => {
-        e.preventDefault();
-        const dropIdx = parseInt(row.dataset.dragIndex);
-        if (dragSrc === null || dragSrc === dropIdx) return;
-        const tmp = weekPlan[dragSrc].recipe;
-        weekPlan[dragSrc].recipe = weekPlan[dropIdx].recipe;
-        weekPlan[dropIdx].recipe = tmp;
+    grid.querySelectorAll('.move-btn').forEach(btn => {
+      btn.addEventListener('click', () => openMoveModal(parseInt(btn.dataset.move)));
+    });
+  }
+
+  // --- Move modal ---
+  let moveSrcIndex = null;
+
+  function openMoveModal(srcIndex) {
+    moveSrcIndex = srcIndex;
+    const srcDay = weekPlan[srcIndex].day;
+    document.getElementById('modal-day-label').textContent =
+      `Move ${srcDay}'s meal to which day?`;
+    const list = document.getElementById('modal-list');
+    list.innerHTML = weekPlan
+      .filter((_, i) => i !== srcIndex && weekPlan[i].recipe)
+      .map(entry => `
+        <button class="modal-recipe-btn" data-move-to="${DAYS.indexOf(entry.day)}">
+          <span>${entry.day}</span>
+          <span class="tag">${entry.recipe.name}</span>
+        </button>`).join('');
+    list.querySelectorAll('.modal-recipe-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const destIdx = parseInt(btn.dataset.moveTo);
+        const tmp = weekPlan[moveSrcIndex].recipe;
+        weekPlan[moveSrcIndex].recipe = weekPlan[destIdx].recipe;
+        weekPlan[destIdx].recipe = tmp;
         save(LS.plan, weekPlan);
+        closeModal();
         renderWeek();
       });
     });
+    document.getElementById('swap-modal').classList.add('open');
   }
 
   document.getElementById('generate-btn').addEventListener('click', generatePlan);
