@@ -396,6 +396,35 @@
       margin-top: -4px;
     }
 
+    /* Recipe detail modal */
+    .recipe-detail-ingredients { margin: 16px 0; }
+    .recipe-detail-ingredients li {
+      font-size: 0.88rem;
+      padding: 5px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .recipe-detail-ingredients li span { color: var(--muted); font-size: 0.85rem; }
+    .recipe-detail-instructions {
+      margin-top: 20px;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: var(--text);
+      white-space: pre-wrap;
+    }
+    .recipe-detail-instructions h4 {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .recipe-card { cursor: pointer; }
+    .recipe-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-color: var(--border); }
+
     .error-banner {
       background: #fde8e8;
       border: 1px solid #f5c0c0;
@@ -462,6 +491,17 @@
   </div>
 </main>
 
+<!-- Recipe detail modal -->
+<div class="modal-backdrop" id="recipe-modal">
+  <div class="modal">
+    <button class="modal-close" id="recipe-modal-close">×</button>
+    <h2 id="recipe-modal-title"></h2>
+    <p id="recipe-modal-source" style="color:var(--muted);font-size:0.8rem;margin-top:4px;margin-bottom:0"></p>
+    <ul class="recipe-detail-ingredients" id="recipe-modal-ingredients"></ul>
+    <div class="recipe-detail-instructions" id="recipe-modal-instructions"></div>
+  </div>
+</div>
+
 <!-- Swap modal -->
 <div class="modal-backdrop" id="swap-modal">
   <div class="modal">
@@ -524,12 +564,16 @@
         ? `${r.source.book}${r.source.page ? `, p.${r.source.page}` : ''}`
         : '';
       return `
-        <div class="recipe-card">
+        <div class="recipe-card" data-id="${r.id}" role="button" tabindex="0">
           <h3>${r.name}</h3>
           <span class="tag">${r.category}</span>
           ${src ? `<span class="source">${src}</span>` : ''}
         </div>`;
     }).join('');
+
+    grid.querySelectorAll('.recipe-card').forEach(card => {
+      card.addEventListener('click', () => openRecipeModal(card.dataset.id));
+    });
   }
 
   // --- Recipe picker on week tab ---
@@ -768,6 +812,33 @@
     checkedItems = {};
     save(LS.checked, checkedItems);
     renderShopping();
+  });
+
+  // --- Recipe detail modal ---
+  function openRecipeModal(id) {
+    const r = recipes.find(x => x.id === id);
+    if (!r) return;
+    document.getElementById('recipe-modal-title').textContent = r.name;
+    const src = r.source
+      ? `${r.source.book}${r.source.page ? `, p.${r.source.page}` : ''}`
+      : '';
+    document.getElementById('recipe-modal-source').textContent = src;
+    document.getElementById('recipe-modal-ingredients').innerHTML =
+      r.ingredients.map(i => `<li><span>${i.name}</span><span>${i.amount}</span></li>`).join('');
+    const instrEl = document.getElementById('recipe-modal-instructions');
+    if (r.instructions) {
+      instrEl.innerHTML = `<h4>Method</h4>${r.instructions}`;
+    } else {
+      instrEl.innerHTML = '';
+    }
+    document.getElementById('recipe-modal').classList.add('open');
+  }
+
+  document.getElementById('recipe-modal-close').addEventListener('click', () =>
+    document.getElementById('recipe-modal').classList.remove('open'));
+  document.getElementById('recipe-modal').addEventListener('click', e => {
+    if (e.target === e.currentTarget)
+      document.getElementById('recipe-modal').classList.remove('open');
   });
 
   // Boot

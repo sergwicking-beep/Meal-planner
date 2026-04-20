@@ -472,6 +472,47 @@
     ]
   },
   {
+    "id": "39",
+    "name": "Roasted Aubergine with Peanuts, Chilli & Lime",
+    "category": "Vegan",
+    "servings": 2,
+    "source": { "book": "Unknown Roasting Tin", "page": null },
+    "instructions": "1. Preheat the oven to 180°C fan/200°C/gas 6.\n\n2. Tip the aubergines, red pepper and corn into a tin large enough to hold them all in one layer and mix through the garlic, ginger, salt, sesame oil and black pepper. Transfer to the oven and roast for 45 minutes.\n\n3. Meanwhile, mix together all the ingredients for the dressing and set aside. You want a good spoonable consistency, something like double cream, so you may need to add a little more water to adjust the texture depending on your brand of peanut butter.\n\n4. Once the aubergines are cooked through, pour over the dressing, taste and adjust the salt as needed, scatter over the fresh coriander and serve hot with quick-cook rice or noodles.",
+    "ingredients": [
+      { "name": "aubergines", "amount": "2", "category": "Veg" },
+      { "name": "red pepper", "amount": "1", "category": "Veg" },
+      { "name": "baby corn", "amount": "170g", "category": "Veg" },
+      { "name": "garlic", "amount": "3 cloves", "category": "Veg" },
+      { "name": "ginger", "amount": "5cm", "category": "Veg" },
+      { "name": "sea salt flakes", "amount": "1 tsp", "category": "Pantry" },
+      { "name": "sesame oil", "amount": "2 tbsp", "category": "Pantry" },
+      { "name": "crunchy peanut butter", "amount": "75g", "category": "Pantry" },
+      { "name": "soy sauce", "amount": "2 tbsp", "category": "Pantry" },
+      { "name": "sesame oil", "amount": "1 tbsp", "category": "Pantry" },
+      { "name": "limes", "amount": "2–4", "category": "Veg" },
+      { "name": "fresh red chilli", "amount": "1", "category": "Veg" },
+      { "name": "fresh coriander", "amount": "handful", "category": "Veg" },
+      { "name": "rice or noodles", "amount": "300g", "category": "Pantry" }
+    ]
+  },
+  {
+    "id": "40",
+    "name": "Streetcorn Tacos",
+    "category": "Vegetarian",
+    "servings": 4,
+    "source": null,
+    "ingredients": [
+      { "name": "sweetcorn", "amount": "2 cobs or 400g tin", "category": "Veg" },
+      { "name": "feta", "amount": "100g", "category": "Dairy" },
+      { "name": "tomatoes", "amount": "2", "category": "Veg" },
+      { "name": "lime", "amount": "1", "category": "Veg" },
+      { "name": "fresh coriander", "amount": "small bunch", "category": "Veg" },
+      { "name": "mayo", "amount": "3 tbsp", "category": "Pantry" },
+      { "name": "jalapeños", "amount": "to taste", "category": "Veg" },
+      { "name": "taco shells or tortillas", "amount": "8", "category": "Pantry" }
+    ]
+  },
+  {
     "id": "35",
     "name": "Creamy Mac & Greens",
     "category": "Vegan",
