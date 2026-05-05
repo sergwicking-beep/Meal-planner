@@ -624,13 +624,15 @@
     "servings": 4,
     "source": null,
     "ingredients": [
-      { "name": "sweet potato", "amount": "1 large", "category": "Veg" },
+      { "name": "lasagne sheets", "amount": "", "category": "Pantry" },
+      { "name": "butter", "amount": "", "category": "Dairy" },
+      { "name": "cheese", "amount": "", "category": "Dairy" },
+      { "name": "chopped tomatoes", "amount": "2 x 400g tins", "category": "Pantry" },
       { "name": "red peppers", "amount": "2", "category": "Veg" },
       { "name": "aubergine", "amount": "1", "category": "Veg" },
-      { "name": "chopped tomatoes", "amount": "2 x 400g tins", "category": "Pantry" },
-      { "name": "cheese", "amount": "200g", "category": "Dairy" },
-      { "name": "lasagne sheets", "amount": "250g", "category": "Pantry" },
-      { "name": "butter", "amount": "50g", "category": "Dairy" }
+      { "name": "courgette", "amount": "1", "category": "Veg" },
+      { "name": "olives", "amount": "", "category": "Pantry" },
+      { "name": "sweet potato", "amount": "1 large", "category": "Veg" }
     ]
   },
   {
