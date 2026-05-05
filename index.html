@@ -108,6 +108,43 @@
       margin-top: 8px;
     }
 
+    .recipe-card--this-week {
+      border-color: var(--accent);
+      background: #fdf5f0;
+    }
+
+    .recipe-card--this-week h3 { color: var(--accent); }
+
+    .recipe-card--this-week .this-week-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 2px 7px;
+      border-radius: 99px;
+      margin-bottom: 6px;
+    }
+
+    .recipe-section-label {
+      grid-column: 1 / -1;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--muted);
+      padding-top: 8px;
+    }
+
+    .recipe-section-divider {
+      grid-column: 1 / -1;
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 8px 0;
+    }
+
     /* Recipe picker on week tab */
     .recipe-picker {
       margin-bottom: 24px;
@@ -640,6 +677,7 @@
       btn.classList.add('active');
       document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
       if (btn.dataset.tab === 'shopping') renderShopping();
+      if (btn.dataset.tab === 'recipes') renderRecipeGrid();
     });
   });
 
@@ -655,17 +693,39 @@
   // --- Recipes tab (read-only) ---
   function renderRecipeGrid() {
     const grid = document.getElementById('recipe-grid');
-    grid.innerHTML = recipes.map(r => {
+
+    const plannedIds = new Set(
+      weekPlan.filter(e => e.recipe).map(e => e.recipe.id)
+    );
+
+    function recipeCard(r, isPlanned) {
       const src = r.source
         ? `${r.source.book}${r.source.page ? `, p.${r.source.page}` : ''}`
         : '';
       return `
-        <div class="recipe-card" data-id="${r.id}" role="button" tabindex="0">
+        <div class="recipe-card${isPlanned ? ' recipe-card--this-week' : ''}" data-id="${r.id}" role="button" tabindex="0">
+          ${isPlanned ? '<span class="this-week-badge">This week</span>' : ''}
           <h3>${r.name}</h3>
           <span class="tag">${r.category}</span>
           ${src ? `<span class="source">${src}</span>` : ''}
         </div>`;
-    }).join('');
+    }
+
+    const planned = recipes.filter(r => plannedIds.has(r.id));
+    const rest = recipes.filter(r => !plannedIds.has(r.id));
+
+    let html = '';
+    if (planned.length > 0) {
+      html += '<div class="recipe-section-label">This week</div>';
+      html += planned.map(r => recipeCard(r, true)).join('');
+      if (rest.length > 0) {
+        html += '<hr class="recipe-section-divider">';
+        html += '<div class="recipe-section-label">All recipes</div>';
+      }
+    }
+    html += rest.map(r => recipeCard(r, false)).join('');
+
+    grid.innerHTML = html;
 
     grid.querySelectorAll('.recipe-card').forEach(card => {
       card.addEventListener('click', () => openRecipeModal(card.dataset.id));
