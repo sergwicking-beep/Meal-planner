@@ -661,6 +661,30 @@
   let removedKeys = load(LS.removed) || [];
   let swapTargetDay = null;
 
+  // Ingredients that are always in stock — omit from shopping list
+  const SKIP_INGREDIENTS = new Set([
+    'olive oil', 'extra virgin olive oil', 'groundnut oil', 'vegetable oil',
+    'coconut oil or neutral oil', 'coconut or groundnut oil', 'groundnut or vegetable oil',
+    'rapeseed oil', 'sea salt', 'sea salt flakes', 'salt', 'black pepper',
+    'white pepper', 'ground black pepper',
+  ]);
+
+  // Map ingredient name variants to a single canonical name
+  const INGREDIENT_ALIASES = {
+    'light soy sauce': 'soy sauce',
+    'soy or tamari sauce': 'soy sauce',
+    'pitted green olives': 'olives',
+    'pitted black olives': 'olives',
+    'black olives': 'olives',
+    'crunchy peanut butter': 'peanut butter',
+  };
+
+  function canonicalIngredient(name) {
+    const key = name.toLowerCase().trim();
+    if (SKIP_INGREDIENTS.has(key)) return null;
+    return INGREDIENT_ALIASES[key] || name;
+  }
+
   function load(key) {
     try { return JSON.parse(localStorage.getItem(key)); } catch { return null; }
   }
@@ -935,18 +959,20 @@
       return;
     }
 
-    // Aggregate ingredients
+    // Aggregate ingredients, normalising names and skipping basics
     const byCategory = {};
     meals.forEach(({ recipe }) => {
       recipe.ingredients.forEach(ing => {
+        const canonical = canonicalIngredient(ing.name);
+        if (!canonical) return;
         const cat = ing.category;
         if (!byCategory[cat]) byCategory[cat] = [];
-        const existing = byCategory[cat].find(i => i.name === ing.name);
+        const existing = byCategory[cat].find(i => i.name === canonical);
         if (existing) {
           existing.amounts.push(ing.amount);
           if (!existing.recipes.includes(recipe.name)) existing.recipes.push(recipe.name);
         } else {
-          byCategory[cat].push({ name: ing.name, amounts: [ing.amount], recipes: [recipe.name] });
+          byCategory[cat].push({ name: canonical, amounts: [ing.amount], recipes: [recipe.name] });
         }
       });
     });
