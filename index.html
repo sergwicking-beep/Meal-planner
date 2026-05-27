@@ -243,18 +243,30 @@
       transition: border-color 0.15s, background 0.15s, opacity 0.15s;
     }
 
-    .drag-handle {
-      color: var(--border);
-      cursor: grab;
-      font-size: 1.2rem;
+    .reorder-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
       flex-shrink: 0;
-      user-select: none;
-      line-height: 1;
-      transition: color 0.15s;
     }
-    .drag-handle:hover { color: var(--muted); }
-    .day-row.dragging { opacity: 0.35; }
-    .day-row.drag-over { border-color: var(--accent); background: #fdf5f0; }
+    .reorder-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      width: 22px;
+      height: 22px;
+      cursor: pointer;
+      font-size: 0.65rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      line-height: 1;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .reorder-btn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+    .reorder-btn:disabled { opacity: 0.2; cursor: default; }
 
     .tick-btn {
       width: 26px; height: 26px;
@@ -808,15 +820,17 @@
   }
 
   // --- Week tab ---
-  let dragSrcIndex = null;
-
   function renderWeek() {
     const grid = document.getElementById('week-grid');
+    const last = weekPlan.length - 1;
     grid.innerHTML = weekPlan.map((entry, i) => {
       const cooked = cookedDays.includes(entry.day);
       return `
-        <div class="day-row ${cooked ? 'cooked' : ''}" draggable="true" data-day-index="${i}">
-          <span class="drag-handle" title="Drag to reorder">⠿</span>
+        <div class="day-row ${cooked ? 'cooked' : ''}">
+          <div class="reorder-btns">
+            <button class="reorder-btn up-btn" data-up="${i}" ${i === 0 ? 'disabled' : ''} title="Move up">▲</button>
+            <button class="reorder-btn down-btn" data-down="${i}" ${i === last ? 'disabled' : ''} title="Move down">▼</button>
+          </div>
           <button class="tick-btn ${cooked ? 'ticked' : ''}" data-tick="${i}" title="Mark as cooked">✓</button>
           <span class="day-label">${entry.day}</span>
           ${entry.recipe
@@ -869,37 +883,23 @@
       });
     });
 
-    // Drag-and-drop to reorder
-    grid.querySelectorAll('.day-row').forEach(row => {
-      const idx = parseInt(row.dataset.dayIndex);
-
-      row.addEventListener('dragstart', e => {
-        dragSrcIndex = idx;
-        e.dataTransfer.effectAllowed = 'move';
-        setTimeout(() => row.classList.add('dragging'), 0);
+    grid.querySelectorAll('.up-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const i = parseInt(btn.dataset.up);
+        const tmp = weekPlan[i].recipe;
+        weekPlan[i].recipe = weekPlan[i - 1].recipe;
+        weekPlan[i - 1].recipe = tmp;
+        save(LS.plan, weekPlan);
+        renderWeek();
       });
+    });
 
-      row.addEventListener('dragend', () => {
-        row.classList.remove('dragging');
-        grid.querySelectorAll('.day-row').forEach(r => r.classList.remove('drag-over'));
-        dragSrcIndex = null;
-      });
-
-      row.addEventListener('dragover', e => {
-        e.preventDefault();
-        e.dataTransfer.dropEffect = 'move';
-        if (idx !== dragSrcIndex) {
-          grid.querySelectorAll('.day-row').forEach(r => r.classList.remove('drag-over'));
-          row.classList.add('drag-over');
-        }
-      });
-
-      row.addEventListener('drop', e => {
-        e.preventDefault();
-        if (dragSrcIndex === null || dragSrcIndex === idx) return;
-        const tmp = weekPlan[dragSrcIndex].recipe;
-        weekPlan[dragSrcIndex].recipe = weekPlan[idx].recipe;
-        weekPlan[idx].recipe = tmp;
+    grid.querySelectorAll('.down-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const i = parseInt(btn.dataset.down);
+        const tmp = weekPlan[i].recipe;
+        weekPlan[i].recipe = weekPlan[i + 1].recipe;
+        weekPlan[i + 1].recipe = tmp;
         save(LS.plan, weekPlan);
         renderWeek();
       });
