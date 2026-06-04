@@ -643,7 +643,7 @@
     "source": null,
     "ingredients": [
       { "name": "fish cakes", "amount": "4", "category": "Seafood" },
-      { "name": "chips", "amount": "500g", "category": "Veg" },
+      { "name": "chips", "amount": "500g", "category": "Frozen" },
       { "name": "tenderstem broccoli", "amount": "200g", "category": "Veg" }
     ]
   },
@@ -656,13 +656,13 @@
     "ingredients": [
       { "name": "chickpeas", "amount": "2 x 400g tins", "category": "Pantry" },
       { "name": "ras el hanout", "amount": "1 heaped tsp", "category": "Pantry" },
-      { "name": "orange", "amount": "1 unwaxed", "category": "Veg" },
+      { "name": "orange", "amount": "1 unwaxed", "category": "Fruit" },
       { "name": "halloumi", "amount": "200g block", "category": "Dairy" },
       { "name": "tahini", "amount": "3 tbsp", "category": "Pantry" },
       { "name": "purple-sprouting broccoli", "amount": "250g", "category": "Veg" },
       { "name": "olive oil", "amount": "2 tbsp", "category": "Pantry" },
       { "name": "fresh parsley", "amount": "small bunch", "category": "Veg" },
-      { "name": "pomegranate seeds", "amount": "handful", "category": "Veg" },
+      { "name": "pomegranate seeds", "amount": "handful", "category": "Fruit" },
       { "name": "pumpkin seeds", "amount": "large handful", "category": "Pantry" },
       { "name": "honey or maple syrup", "amount": "1 heaped tsp", "category": "Pantry" },
       { "name": "flatbreads", "amount": "4", "category": "Pantry" }

@@ -696,12 +696,74 @@
 
   // Map ingredient name variants to a single canonical name
   const INGREDIENT_ALIASES = {
+    // Sauces / condiments
     'light soy sauce': 'soy sauce',
     'soy or tamari sauce': 'soy sauce',
+    'crunchy peanut butter': 'peanut butter',
+    // Olives
     'pitted green olives': 'olives',
     'pitted black olives': 'olives',
     'black olives': 'olives',
-    'crunchy peanut butter': 'peanut butter',
+    // Veg plurals & variants
+    'courgettes': 'courgette',
+    'aubergines': 'aubergine',
+    'baby aubergines': 'aubergine',
+    'onions': 'onion',
+    'red onions': 'red onion',
+    'garlic cloves': 'garlic',
+    'garlic clove': 'garlic',
+    'garlic cloves,': 'garlic',
+    'spring onions': 'spring onion',
+    'green peppers': 'green pepper',
+    'red peppers': 'red pepper',
+    'red chillies': 'red chilli',
+    'fresh red chilli': 'red chilli',
+    'fresh red chillies': 'red chilli',
+    'scotch bonnet chilli': 'chilli',
+    'fennel bulbs': 'fennel',
+    'celery sticks': 'celery',
+    'celery stick': 'celery',
+    'sweet potatoes': 'sweet potato',
+    'radishes': 'radish',
+    'limes': 'lime',
+    'lemons': 'lemon',
+    'carrots': 'carrot',
+    'banana shallots': 'shallot',
+    'purple-sprouting broccoli': 'broccoli',
+    'tenderstem broccoli': 'broccoli',
+    // Herbs
+    'fresh coriander': 'coriander',
+    'fresh basil': 'basil',
+    'basil leaves': 'basil',
+    'thai basil': 'basil',
+    'fresh flat-leaf parsley': 'parsley',
+    'fresh parsley': 'parsley',
+    'fresh dill': 'dill',
+    'fresh rosemary': 'rosemary',
+    // Tomatoes
+    'vine tomatoes': 'tomatoes',
+    // Peanuts
+    'unsalted red-skinned peanuts': 'peanuts',
+    'salted peanuts': 'peanuts',
+    'roasted unsalted peanuts': 'peanuts',
+    'toasted almonds': 'almonds',
+    // Other
+    'eggs (optional)': 'eggs',
+    'honey or maple syrup': 'honey / maple syrup',
+    'chickpeas or cannellini beans': 'chickpeas',
+    'walnuts or almonds': 'walnuts / almonds',
+  };
+
+  // Override category for specific ingredients regardless of what recipes.json says
+  const CATEGORY_OVERRIDES = {
+    'chips': 'Frozen',
+    'oven chips': 'Frozen',
+    'frozen chips': 'Frozen',
+    'frozen peas': 'Frozen',
+    'ice cream': 'Frozen',
+    'orange': 'Fruit',
+    'pomegranate seeds': 'Fruit',
+    'pomegranate': 'Fruit',
   };
 
   function canonicalIngredient(name) {
@@ -714,12 +776,16 @@
     Meat: ['chicken','beef','lamb','pork','bacon','ham','sausage','mince','steak','turkey','duck','veal','chorizo','salami','pepperoni','venison','brisket','rib','loin'],
     Seafood: ['fish','salmon','tuna','cod','haddock','prawn','shrimp','lobster','crab','scallop','squid','sardine','mackerel','trout','bass','anchovy','mussel','clam','oyster','tilapia','halibut','monkfish'],
     Dairy: ['milk','cheese','butter','cream','yogurt','yoghurt','egg','mozzarella','cheddar','parmesan','feta','halloumi','ricotta','mascarpone','brie','camembert','gouda','stilton','cottage cheese','sour cream','crème fraîche','creme fraiche','ghee'],
-    Veg: ['corn','carrot','onion','garlic','tomato','potato','broccoli','spinach','kale','lettuce','celery','cucumber','zucchini','courgette','mushroom','pea','bean','asparagus','leek','cabbage','cauliflower','aubergine','eggplant','beetroot','parsnip','squash','pumpkin','sweet potato','ginger','spring onion','scallion','chilli','chili','jalapeno','pepper','lime','lemon','avocado','basil','parsley','coriander','cilantro','mint','rosemary','thyme','sage','dill','tarragon','rocket','watercress','radish','fennel','artichoke','turnip','herb','shallot','chard','pak choi','bok choy','edamame','butternut'],
+    Fruit: ['apple','pear','banana','orange','mango','pineapple','strawberry','raspberry','blueberry','grape','cherry','peach','plum','nectarine','apricot','watermelon','melon','kiwi','papaya','passion fruit','lychee','pomegranate','lemon','lime','grapefruit','clementine','tangerine','satsuma','fig','date','raisin','cranberry','blackberry','blackcurrant','gooseberry'],
+    Veg: ['corn','carrot','onion','garlic','tomato','potato','broccoli','spinach','kale','lettuce','celery','cucumber','zucchini','courgette','mushroom','pea','bean','asparagus','leek','cabbage','cauliflower','aubergine','eggplant','beetroot','parsnip','squash','pumpkin','sweet potato','ginger','spring onion','scallion','chilli','chili','jalapeno','pepper','avocado','basil','parsley','coriander','cilantro','mint','rosemary','thyme','sage','dill','tarragon','rocket','watercress','radish','fennel','artichoke','turnip','herb','shallot','chard','pak choi','bok choy','edamame','butternut'],
+    Frozen: ['frozen','oven chips','ice cream','sorbet'],
     Pantry: ['flour','sugar','rice','pasta','bread','vinegar','soy sauce','stock','canned','tinned','lentil','chickpea','oat','honey','jam','almond','cashew','peanut','walnut','pecan','pistachio','sesame','cumin','paprika','turmeric','curry','noodle','couscous','quinoa','spice','mustard','ketchup','tamari','miso','tahini','coconut milk','polenta','barley','bulgur','cracker','biscuit','cereal','syrup','molasses','baking powder','baking soda','yeast','cornflour','cornstarch'],
   };
 
   function detectCategory(name) {
     const n = name.toLowerCase().trim();
+    // Check CATEGORY_OVERRIDES first for exact matches
+    if (CATEGORY_OVERRIDES[n]) return CATEGORY_OVERRIDES[n];
     for (const [cat, keywords] of Object.entries(CATEGORY_KEYWORDS)) {
       if (keywords.some(k => n.includes(k))) return cat;
     }
@@ -1033,7 +1099,7 @@
       recipe.ingredients.forEach(ing => {
         const canonical = canonicalIngredient(ing.name);
         if (!canonical) return;
-        const cat = ing.category;
+        const cat = CATEGORY_OVERRIDES[canonical.toLowerCase()] || CATEGORY_OVERRIDES[ing.name.toLowerCase()] || ing.category;
         if (!byCategory[cat]) byCategory[cat] = [];
         const existing = byCategory[cat].find(i => i.name === canonical);
         if (existing) {
@@ -1045,7 +1111,7 @@
       });
     });
 
-    const catOrder = ['Meat', 'Seafood', 'Dairy', 'Veg', 'Pantry', 'Other'];
+    const catOrder = ['Meat', 'Seafood', 'Dairy', 'Fruit', 'Veg', 'Frozen', 'Pantry', 'Other'];
 
     // Merge categorized custom items into byCategory so they appear in the right section
     const categorizedCustomUnchecked = customItems.filter(i => i.category && !checkedItems[`custom__${i.id}`]);
