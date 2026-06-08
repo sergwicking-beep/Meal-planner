@@ -5,9 +5,7 @@
   "scripts": {
     "dev": "vercel dev"
   },
-  "dependencies": {
-    "@anthropic-ai/sdk": "^0.52.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "vercel": "^39.0.0"
   }
