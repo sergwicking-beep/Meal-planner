@@ -667,5 +667,53 @@
       { "name": "honey or maple syrup", "amount": "1 heaped tsp", "category": "Pantry" },
       { "name": "flatbreads", "amount": "4", "category": "Pantry" }
     ]
+  },
+  {
+    "id": "41",
+    "name": "Southwest BOSH! Bowl",
+    "category": "Vegan",
+    "servings": 2,
+    "source": { "book": "BOSH!", "page": 159 },
+    "ingredients": [
+      { "name": "cooked basmati rice", "amount": "140g", "category": "Pantry" },
+      { "name": "black beans", "amount": "1 x 400g tin", "category": "Pantry" },
+      { "name": "sweetcorn", "amount": "1 x 200g tin", "category": "Pantry" },
+      { "name": "tomatoes", "amount": "2 large", "category": "Veg" },
+      { "name": "red pepper", "amount": "½", "category": "Veg" },
+      { "name": "red onion", "amount": "½ small", "category": "Veg" },
+      { "name": "avocados", "amount": "2 small", "category": "Veg" },
+      { "name": "lime", "amount": "1", "category": "Veg" },
+      { "name": "green chilli", "amount": "½", "category": "Veg" },
+      { "name": "olive oil", "amount": "1 tbsp", "category": "Pantry" },
+      { "name": "unsweetened plant-based milk", "amount": "150ml", "category": "Pantry" },
+      { "name": "maple syrup", "amount": "1 tsp", "category": "Pantry" },
+      { "name": "garlic powder", "amount": "½ tsp", "category": "Pantry" },
+      { "name": "baby gem lettuce", "amount": "1", "category": "Veg" },
+      { "name": "fresh coriander", "amount": "50g", "category": "Veg" },
+      { "name": "hot sauce", "amount": "to serve", "category": "Pantry" },
+      { "name": "salt and black pepper", "amount": "to taste", "category": "Pantry" }
+    ],
+    "instructions": "1. Tip the pre-cooked rice into a mixing bowl, fluff it with a fork and transfer to a serving bowl.\n\n2. Drain the black beans and sweetcorn and add them to the rice.\n\n3. Halve the tomatoes, cut out the seeds and finely dice. Trim any stem and seeds from the pepper and finely dice. Peel and finely dice the onion. Add the diced vegetables to the rice and fold together.\n\n4. Halve and carefully stone the avocados by tapping the stones firmly with the heel of a knife so that it lodges in the pit, then twist and remove the stones. Scoop the flesh into a liquidiser. Cut the lime in half and squeeze in most of the juice, catching any pips in your other hand. Rip the stem from the chilli, cut it in half lengthways and remove the seeds if you prefer a milder flavour. Add the chilli, olive oil, plant-based milk, maple syrup and garlic powder to the liquidiser and whizz to a creamy sauce with a thick drizzling consistency, adding a splash more plant-based milk if necessary. Taste and adjust the seasoning as needed.\n\n5. Finely slice the lettuce. Chop the coriander leaves and finely chop the stalks. Add the lettuce and coriander to the rice. Add the dressing and stir everything together. Check the seasoning and add salt, pepper or remaining lime juice to taste.\n\n6. Spoon into bowls to serve, drizzled with a little hot sauce."
+  },
+  {
+    "id": "42",
+    "name": "Quick & Healthy Pizza",
+    "category": "Vegetarian",
+    "servings": 2,
+    "source": null,
+    "ingredients": [
+      { "name": "white spelt flour", "amount": "150g", "category": "Pantry" },
+      { "name": "wholegrain spelt flour", "amount": "100g", "category": "Pantry" },
+      { "name": "fast-action yeast", "amount": "1 x 7g sachet", "category": "Pantry" },
+      { "name": "honey", "amount": "1 tsp", "category": "Pantry" },
+      { "name": "fine sea salt", "amount": "1 tsp", "category": "Pantry" },
+      { "name": "pesto", "amount": "4 tbsp", "category": "Pantry" },
+      { "name": "buffalo mozzarella", "amount": "1 ball", "category": "Dairy" },
+      { "name": "cherry tomatoes", "amount": "handful", "category": "Veg" },
+      { "name": "rocket leaves", "amount": "handful", "category": "Veg" },
+      { "name": "dried chilli flakes", "amount": "1 tsp", "category": "Pantry" },
+      { "name": "extra virgin olive oil", "amount": "for drizzling", "category": "Pantry" }
+    ],
+    "instructions": "1. To make the dough, put the flours, yeast and salt in the bowl of a stand mixer fitted with a dough hook and stir to combine. Add the honey and water, then switch on the machine and knead for 3 minutes until it comes together into a ball of dough. Alternatively you can knead by hand for about 6 minutes until smooth and springy.\n\n2. Remove the dough and divide in half. Roll out each ball on a lightly floured surface to a round measuring about 18cm. Transfer the pizza bases to two lightly oiled baking sheets and set aside to rise while you prepare your toppings.\n\n3. Preheat the oven to 240°C/220°C fan/475°F/Gas mark 9.\n\n4. After 20 minutes, spread the pesto over the pizza bases. Lay the mozzarella and tomatoes on top and bake for 10-12 minutes until crisp.\n\n5. Remove from the oven and top with the rocket leaves, scatter over the dried chilli flakes (if using) and drizzle over a little extra virgin olive oil. Serve immediately."
   }
 ]
