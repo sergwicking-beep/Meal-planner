@@ -715,5 +715,27 @@
       { "name": "extra virgin olive oil", "amount": "for drizzling", "category": "Pantry" }
     ],
     "instructions": "1. To make the dough, put the flours, yeast and salt in the bowl of a stand mixer fitted with a dough hook and stir to combine. Add the honey and water, then switch on the machine and knead for 3 minutes until it comes together into a ball of dough. Alternatively you can knead by hand for about 6 minutes until smooth and springy.\n\n2. Remove the dough and divide in half. Roll out each ball on a lightly floured surface to a round measuring about 18cm. Transfer the pizza bases to two lightly oiled baking sheets and set aside to rise while you prepare your toppings.\n\n3. Preheat the oven to 240°C/220°C fan/475°F/Gas mark 9.\n\n4. After 20 minutes, spread the pesto over the pizza bases. Lay the mozzarella and tomatoes on top and bake for 10-12 minutes until crisp.\n\n5. Remove from the oven and top with the rocket leaves, scatter over the dried chilli flakes (if using) and drizzle over a little extra virgin olive oil. Serve immediately."
+  },
+  {
+    "id": "43",
+    "name": "Caramelised Courgette Pasta with Butter & Basil",
+    "category": "Vegetarian",
+    "servings": 2,
+    "source": null,
+    "notes": "Courgettes slow-cooked in butter until deeply golden and jammy, tossed with pasta, parmesan, and torn basil. Real caramelisation takes 15-20 min of slow, undisturbed cooking — don't rush it or crowd the pan, or the courgettes will steam instead of browning.",
+    "ingredients": [
+      { "name": "courgettes", "amount": "3", "category": "Veg" },
+      { "name": "unsalted butter", "amount": "60g", "category": "Dairy" },
+      { "name": "pasta (casarecce, fusilli, or spaghetti)", "amount": "200g", "category": "Pantry" },
+      { "name": "garlic cloves", "amount": "2", "category": "Veg" },
+      { "name": "parmesan", "amount": "40g", "category": "Dairy" },
+      { "name": "fresh basil", "amount": "15 leaves", "category": "Veg" },
+      { "name": "olive oil", "amount": "1 tbsp", "category": "Pantry" },
+      { "name": "lemon", "amount": "½", "category": "Veg" },
+      { "name": "sea salt", "amount": "1 tsp", "category": "Pantry" },
+      { "name": "black pepper", "amount": "½ tsp", "category": "Pantry" },
+      { "name": "chilli flakes", "amount": "¼ tsp", "category": "Pantry" }
+    ],
+    "instructions": "1. Salt the courgettes: thinly slice into half-moons, toss with half the salt in a colander and let sit for 15 minutes to draw out the water. Pat dry thoroughly.\n\n2. Start caramelising: heat the olive oil and half the butter in a wide, heavy-bottomed pan over medium heat. Add the courgettes in a single layer, batching if needed, and cook without stirring too much, letting them brown.\n\n3. Slow cook to jammy and golden: reduce to medium-low and cook for about 20 minutes, stirring occasionally, until deeply caramelised and jammy at the edges.\n\n4. Boil the pasta: meanwhile, cook the pasta in salted boiling water until al dente, about 10 minutes. Reserve a mugful of pasta water before draining.\n\n5. Add garlic and butter: push the courgettes aside, add the remaining butter and thinly sliced garlic, and cook for about 1 minute until fragrant and nutty.\n\n6. Combine: add the drained pasta with a splash of pasta water and toss vigorously to build a glossy sauce, adding more water as needed.\n\n7. Finish: off the heat, stir through the grated parmesan, most of the torn basil, the lemon zest, black pepper, and chilli flakes if using. Adjust seasoning with the remaining salt.\n\n8. Serve: plate immediately, topped with the remaining basil and extra parmesan."
   }
 ]
