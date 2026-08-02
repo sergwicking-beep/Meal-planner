@@ -737,5 +737,27 @@
       { "name": "chilli flakes", "amount": "¼ tsp", "category": "Pantry" }
     ],
     "instructions": "1. Salt the courgettes: thinly slice into half-moons, toss with half the salt in a colander and let sit for 15 minutes to draw out the water. Pat dry thoroughly.\n\n2. Start caramelising: heat the olive oil and half the butter in a wide, heavy-bottomed pan over medium heat. Add the courgettes in a single layer, batching if needed, and cook without stirring too much, letting them brown.\n\n3. Slow cook to jammy and golden: reduce to medium-low and cook for about 20 minutes, stirring occasionally, until deeply caramelised and jammy at the edges.\n\n4. Boil the pasta: meanwhile, cook the pasta in salted boiling water until al dente, about 10 minutes. Reserve a mugful of pasta water before draining.\n\n5. Add garlic and butter: push the courgettes aside, add the remaining butter and thinly sliced garlic, and cook for about 1 minute until fragrant and nutty.\n\n6. Combine: add the drained pasta with a splash of pasta water and toss vigorously to build a glossy sauce, adding more water as needed.\n\n7. Finish: off the heat, stir through the grated parmesan, most of the torn basil, the lemon zest, black pepper, and chilli flakes if using. Adjust seasoning with the remaining salt.\n\n8. Serve: plate immediately, topped with the remaining basil and extra parmesan."
+  },
+  {
+    "id": "44",
+    "name": "Herby Roasted Peppers Stuffed with Artichokes, Olives & Feta",
+    "category": "Vegetarian",
+    "servings": 4,
+    "source": { "book": "The Green Roasting Tin", "page": 186 },
+    "notes": "The book's title mentions olives, but the printed ingredients list doesn't include any — likely an inconsistency in the original recipe. Add pitted olives to the stuffing mixture if you'd like to match the title.",
+    "ingredients": [
+      { "name": "long red peppers", "amount": "4, halved lengthways and deseeded", "category": "Veg" },
+      { "name": "artichokes", "amount": "1 x 280g jar, roughly chopped", "category": "Pantry" },
+      { "name": "feta cheese", "amount": "200g, crumbled", "category": "Dairy" },
+      { "name": "pine nuts", "amount": "100g", "category": "Pantry" },
+      { "name": "black pepper", "amount": "freshly ground", "category": "Pantry" },
+      { "name": "fresh flat-leaf parsley", "amount": "25g, finely chopped", "category": "Veg" },
+      { "name": "lemon", "amount": "1, zest and juice", "category": "Veg" },
+      { "name": "breadcrumbs", "amount": "50g", "category": "Pantry" },
+      { "name": "olive oil", "amount": "1 tablespoon", "category": "Pantry" },
+      { "name": "focaccia or good bread", "amount": "to serve", "category": "Pantry" },
+      { "name": "crunchy green salad", "amount": "to serve", "category": "Veg" }
+    ],
+    "instructions": "1. Preheat the oven to 200°C fan/220°C/gas 7. Arrange the halved peppers in a lined roasting tin with plenty of room around them.\n\n2. Mix the artichokes, feta cheese, pine nuts, black pepper, parsley, lemon zest and juice and half the breadcrumbs, and stuff the mixture into the halved peppers.\n\n3. Top with the remaining breadcrumbs, drizzle over the olive oil, then transfer to the oven to roast for 30-35 minutes, until the peppers are softened and slightly charred around the edges and the topping is crisp and golden.\n\n4. Serve hot, with a crunchy green salad and good bread alongside."
   }
 ]
