@@ -759,5 +759,35 @@
       { "name": "crunchy green salad", "amount": "to serve", "category": "Veg" }
     ],
     "instructions": "1. Preheat the oven to 200°C fan/220°C/gas 7. Arrange the halved peppers in a lined roasting tin with plenty of room around them.\n\n2. Mix the artichokes, feta cheese, pine nuts, black pepper, parsley, lemon zest and juice and half the breadcrumbs, and stuff the mixture into the halved peppers.\n\n3. Top with the remaining breadcrumbs, drizzle over the olive oil, then transfer to the oven to roast for 30-35 minutes, until the peppers are softened and slightly charred around the edges and the topping is crisp and golden.\n\n4. Serve hot, with a crunchy green salad and good bread alongside."
+  },
+  {
+    "id": "45",
+    "name": "Teriyaki Aubergine Rice Bowl",
+    "category": "Vegan",
+    "servings": 2,
+    "source": null,
+    "notes": "Sticky glazed aubergine over rice with quick-pickled ginger and cabbage — festival food vibes at home. If you can't get pickled ginger, quickly pickle your own: thin-sliced ginger, rice vinegar and a pinch of sugar and salt, left for 20 minutes. Salting and draining the aubergine for 20 minutes before frying helps it crisp up rather than soak up too much oil, if you have the time.",
+    "ingredients": [
+      { "name": "aubergines", "amount": "2 large, cut into thick chunks or half-moons", "category": "Veg" },
+      { "name": "neutral oil (vegetable or rapeseed)", "amount": "3 tbsp", "category": "Pantry" },
+      { "name": "soy sauce", "amount": "4 tbsp", "category": "Pantry" },
+      { "name": "mirin", "amount": "3 tbsp", "category": "Pantry" },
+      { "name": "sake (or dry sherry) (optional)", "amount": "2 tbsp", "category": "Pantry" },
+      { "name": "brown sugar", "amount": "2 tbsp", "category": "Pantry" },
+      { "name": "garlic", "amount": "2 cloves, grated", "category": "Veg" },
+      { "name": "fresh ginger", "amount": "1 tsp, grated", "category": "Veg" },
+      { "name": "cornflour", "amount": "1 tsp", "category": "Pantry" },
+      { "name": "sushi rice or short-grain rice", "amount": "300g", "category": "Pantry" },
+      { "name": "rice vinegar", "amount": "1 tbsp", "category": "Pantry" },
+      { "name": "red or white cabbage", "amount": "150g, very finely shredded", "category": "Veg" },
+      { "name": "rice vinegar", "amount": "4 tbsp", "category": "Pantry" },
+      { "name": "caster sugar", "amount": "1 tbsp", "category": "Pantry" },
+      { "name": "salt", "amount": "½ tsp", "category": "Pantry" },
+      { "name": "pickled ginger (gari)", "amount": "3 tbsp", "category": "Pantry" },
+      { "name": "spring onions", "amount": "2, sliced", "category": "Veg" },
+      { "name": "sesame seeds", "amount": "1 tbsp", "category": "Pantry" },
+      { "name": "sesame oil", "amount": "1 tsp", "category": "Pantry" }
+    ],
+    "instructions": "1. Quick-pickle the cabbage: toss the cabbage with the rice vinegar, sugar and salt. Scrunch with your hands for a minute, then leave to sit for about 20 minutes while you cook everything else — it softens and turns bright pink-ish as it pickles.\n\n2. Cook the rice: rinse the rice until the water runs clear, then cook according to the packet instructions, about 20 minutes. Once cooked, stir through the rice vinegar and cover to keep warm.\n\n3. Prep the aubergine: cut into thick chunks or half-moons, about 2-3cm — big enough to stay meaty, small enough to cook through.\n\n4. Make the teriyaki sauce: mix the soy sauce, mirin, sake, brown sugar, garlic and ginger in a small bowl or jug. Set aside.\n\n5. Fry the aubergine: heat the oil in a large frying pan or wok over medium-high heat. Add the aubergine in a single layer, batching if needed, and fry for about 10 minutes, turning occasionally, until deeply golden and soft all the way through.\n\n6. Glaze it: pour the teriyaki sauce over the aubergine and let it bubble up. Mix the cornflour with 2 tbsp cold water to make a slurry, then stir into the pan. Toss for 1-2 minutes until it thickens into a sticky, glossy coating.\n\n7. Assemble the bowl: spoon the warm rice into bowls. Top with the glazed aubergine, pickled cabbage, and a few slices of pickled ginger. Scatter over the spring onions and sesame seeds, then finish with a drizzle of sesame oil."
   }
 ]
