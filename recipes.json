@@ -707,6 +707,7 @@
       { "name": "fast-action yeast", "amount": "1 x 7g sachet", "category": "Pantry" },
       { "name": "honey", "amount": "1 tsp", "category": "Pantry" },
       { "name": "fine sea salt", "amount": "1 tsp", "category": "Pantry" },
+      { "name": "water", "amount": "160ml", "category": "Pantry" },
       { "name": "pesto", "amount": "4 tbsp", "category": "Pantry" },
       { "name": "buffalo mozzarella", "amount": "1 ball", "category": "Dairy" },
       { "name": "cherry tomatoes", "amount": "handful", "category": "Veg" },
